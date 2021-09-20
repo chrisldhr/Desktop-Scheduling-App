@@ -1,12 +1,20 @@
 package Model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 public class Country {
     private int CountryID;
     private String CountryName;
+    private static ObservableList allCountries = FXCollections.observableArrayList();
 
     public Country(int CountryID, String CountryName) {
         this.CountryID = CountryID;
         this.CountryName = CountryName;
+    }
+
+    public static ObservableList getAllCountries() {
+        return allCountries;
     }
 
     public int getCountryID() {
