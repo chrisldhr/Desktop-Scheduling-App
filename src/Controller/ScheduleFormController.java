@@ -67,7 +67,13 @@ public class ScheduleFormController implements Initializable {
         stage.show();
     }
 
-    public void ToModifyAppointment(ActionEvent actionEvent) {
+    public void ToModifyAppointment(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("../view/ModifyAppointmentForm.fxml"));
+        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("MODIFY APPOINTMENT FORM");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void ToDeleteAppointment(ActionEvent actionEvent) {
