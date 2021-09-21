@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddCustomerFormController">
+   <children>
+      <Label layoutX="43.0" layoutY="38.0" text="CUSTOMER ID" />
+      <Label layoutX="43.0" layoutY="82.0" />
+      <Label layoutX="43.0" layoutY="125.0" text="ADDRESS" />
+      <Label layoutX="43.0" layoutY="169.0" text="POSTAL CODE" />
+      <Label layoutX="40.0" layoutY="218.0" text="PHONE" />
+      <Label layoutX="41.0" layoutY="261.0" text="COUNTRY" />
+      <Label layoutX="43.0" layoutY="82.0" text="NAME" />
+      <Label layoutX="34.0" layoutY="301.0" text="STATE/PROVINCE" />
+      <TextField layoutX="151.0" layoutY="34.0" />
+      <TextField layoutX="151.0" layoutY="78.0" />
+      <TextField layoutX="151.0" layoutY="121.0" />
+      <TextField layoutX="151.0" layoutY="165.0" />
+      <TextField layoutX="151.0" layoutY="214.0" />
+      <ComboBox layoutX="150.0" layoutY="257.0" prefWidth="150.0" />
+      <ComboBox layoutX="150.0" layoutY="297.0" prefWidth="150.0" />
+      <Button layoutX="55.0" layoutY="353.0" mnemonicParsing="false" onAction="#ToAddButton" text="ADD" />
+      <Button layoutX="248.0" layoutY="353.0" mnemonicParsing="false" onAction="#ToCancelButton" text="CANCEL" />
+   </children>
+</AnchorPane>
