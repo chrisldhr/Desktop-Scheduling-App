@@ -7,7 +7,6 @@
 
     <children>
         <Label layoutX="43.0" layoutY="38.0" text="CUSTOMER ID" />
-        <Label layoutX="43.0" layoutY="82.0" />
         <Label layoutX="43.0" layoutY="125.0" text="ADDRESS" />
         <Label layoutX="43.0" layoutY="169.0" text="POSTAL CODE" />
         <Label layoutX="40.0" layoutY="218.0" text="PHONE" />
