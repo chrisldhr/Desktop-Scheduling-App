@@ -1,7 +1,9 @@
 package Controller;
 
 import DBAccess.DBAppointments;
+import DBAccess.DBCustomers;
 import Model.Appointment;
+import Model.Customer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,9 +28,16 @@ public class ScheduleFormController implements Initializable {
     public TableColumn Type;
     public TableColumn Start;
     public TableColumn End;
-    public TableColumn CustomerID;
+    public TableColumn ApptCustomerID;
     public TableColumn UserID;
     public TableColumn ContactID;
+    public TableView <Customer> CustomerTable;
+    public TableColumn CustomerID;
+    public TableColumn Name;
+    public TableColumn Address;
+    public TableColumn Postal;
+    public TableColumn Phone;
+    public TableColumn DivisionID;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -40,9 +49,18 @@ public class ScheduleFormController implements Initializable {
         Type.setCellValueFactory(new PropertyValueFactory<>("Type"));
         Start.setCellValueFactory(new PropertyValueFactory<>("Start"));
         End.setCellValueFactory(new PropertyValueFactory<>("End"));
-        CustomerID.setCellValueFactory(new PropertyValueFactory<>("CustomerID"));
+        ApptCustomerID.setCellValueFactory(new PropertyValueFactory<>("CustomerID"));
         UserID.setCellValueFactory(new PropertyValueFactory<>("UserID"));
         ContactID.setCellValueFactory(new PropertyValueFactory<>("ContactID"));
+
+        CustomerTable.setItems(DBCustomers.getAllCustomers());
+        CustomerID.setCellValueFactory(new PropertyValueFactory<>("CustomerID"));
+        Name.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        Address.setCellValueFactory(new PropertyValueFactory<>("Address"));
+        Postal.setCellValueFactory(new PropertyValueFactory<>("Postal"));
+        Phone.setCellValueFactory(new PropertyValueFactory<>("Phone"));
+        DivisionID.setCellValueFactory(new PropertyValueFactory<>("DivisionID"));
+
     }
 
 
