@@ -1,5 +1,6 @@
 package Controller;
 
+import DBAccess.DBAppointments;
 import Model.Appointment;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -17,19 +18,31 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ScheduleFormController implements Initializable {
-    public TableColumn AppointmentID;
-    public TableColumn CustomerID;
-    public TableColumn TitleColumn;
-    public TableColumn TypeColumn;
-    public TableColumn StartDateColumn;
-    public TableColumn EndDateColumn;
     public TableView <Appointment> ScheduleTable;
+    public TableColumn AppointmentID;
+    public TableColumn Title;
+    public TableColumn Description;
+    public TableColumn Location;
+    public TableColumn Type;
+    public TableColumn Start;
+    public TableColumn End;
+    public TableColumn CustomerID;
+    public TableColumn UserID;
+    public TableColumn ContactID;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ScheduleTable.setItems(Appointment.getAllAppointments());
+        ScheduleTable.setItems(DBAppointments.getAllAppointments());
         AppointmentID.setCellValueFactory(new PropertyValueFactory<>("AppointmentID"));
+        Title.setCellValueFactory(new PropertyValueFactory<>("Title"));
+        Description.setCellValueFactory(new PropertyValueFactory<>("Description"));
+        Location.setCellValueFactory(new PropertyValueFactory<>("Location"));
+        Type.setCellValueFactory(new PropertyValueFactory<>("Type"));
+        Start.setCellValueFactory(new PropertyValueFactory<>("Start"));
+        End.setCellValueFactory(new PropertyValueFactory<>("End"));
         CustomerID.setCellValueFactory(new PropertyValueFactory<>("CustomerID"));
+        UserID.setCellValueFactory(new PropertyValueFactory<>("UserID"));
+        ContactID.setCellValueFactory(new PropertyValueFactory<>("ContactID"));
     }
 
 

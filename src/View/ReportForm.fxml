@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="34.0" layoutY="25.0" mnemonicParsing="false" text="Report 1" />
+      <Button layoutX="34.0" layoutY="82.0" mnemonicParsing="false" text="Report 2" />
+      <Button layoutX="34.0" layoutY="145.0" mnemonicParsing="false" text="Report 3" />
+      <Label layoutX="122.0" layoutY="29.0" text="Total number of customer appointments by type and month" />
+      <Label layoutX="122.0" layoutY="86.0" text="Schedule for each contact in your organization" />
+      <Label layoutX="122.0" layoutY="149.0" text="Schedule by description" />
+   </children>
+</AnchorPane>

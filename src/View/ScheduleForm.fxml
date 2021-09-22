@@ -3,41 +3,45 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="480.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ScheduleFormController">
+<AnchorPane prefHeight="600.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ScheduleFormController">
    <children>
-      <AnchorPane layoutX="11.0" layoutY="75.0" prefHeight="304.0" prefWidth="231.0" style="-fx-border-color: black; -fx-border-radius: 5;">
+      <AnchorPane layoutX="9.0" layoutY="6.0" prefHeight="192.0" prefWidth="523.0" style="-fx-border-color: black; -fx-border-radius: 5;">
          <children>
-            <Label layoutX="14.0" layoutY="14.0" text="CUSTOMERS" />
-            <TableView layoutX="14.0" layoutY="32.0" prefHeight="200.0" prefWidth="196.0">
+            <Label layoutX="14.0" layoutY="5.0" text="CUSTOMERS" />
+            <TableView layoutX="14.0" layoutY="32.0" prefHeight="100.0" prefWidth="196.0">
               <columns>
                 <TableColumn prefWidth="81.79998397827148" text="Customer_ID" />
                 <TableColumn minWidth="0.0" prefWidth="118.20001220703125" text="Customer_Name" />
               </columns>
             </TableView>
-            <Button layoutX="14.0" layoutY="245.0" mnemonicParsing="false" onAction="#ToAddCustomer" text="ADD" />
-            <Button layoutX="65.0" layoutY="245.0" mnemonicParsing="false" onAction="#ToModifyCustomer" text="MODIFY" />
-            <Button layoutX="154.0" layoutY="245.0" mnemonicParsing="false" onAction="#ToDeleteCustomer" text="DELETE" />
+            <Button layoutX="14.0" layoutY="152.0" mnemonicParsing="false" onAction="#ToAddCustomer" text="ADD" />
+            <Button layoutX="74.0" layoutY="152.0" mnemonicParsing="false" onAction="#ToModifyCustomer" text="MODIFY" />
+            <Button layoutX="206.0" layoutY="152.0" mnemonicParsing="false" onAction="#ToDeleteCustomer" text="DELETE" />
          </children></AnchorPane>
-      <AnchorPane layoutX="248.0" layoutY="72.0" prefHeight="310.0" prefWidth="425.0" style="-fx-border-color: black; -fx-border-radius: 5;">
+      <AnchorPane layoutX="9.0" layoutY="206.0" prefHeight="278.0" prefWidth="822.0" style="-fx-border-color: black; -fx-border-radius: 5;">
          <children>
             <Label layoutX="14.0" layoutY="14.0" text="APPOINTMENTS" />
-            <TableView fx:id="ScheduleTable" layoutX="11.0" layoutY="37.0" prefHeight="200.0" prefWidth="372.0">
+            <TableView fx:id="ScheduleTable" layoutX="11.0" layoutY="37.0" prefHeight="192.0" prefWidth="803.0">
               <columns>
-                <TableColumn fx:id="AppointmentID" prefWidth="99.20001220703125" text="Appointment_ID" />
-                <TableColumn fx:id="CustomerID" prefWidth="79.4000244140625" text="Customer ID" />
-                <TableColumn fx:id="TitleColumn" prefWidth="44.4000244140625" text="Title" />
-                <TableColumn fx:id="TypeColumn" prefWidth="148.39996337890625" text="Type" />
-                <TableColumn fx:id="StartDateColumn" prefWidth="108.20001220703125" text="Start" />
-                <TableColumn fx:id="EndDateColumn" prefWidth="149.0" text="End" />
+                <TableColumn fx:id="AppointmentID" prefWidth="99.20001220703125" text="AppointmentID" />
+                <TableColumn fx:id="Title" prefWidth="44.4000244140625" text="Title" />
+                  <TableColumn fx:id="Description" prefWidth="74.80001831054688" text="Description" />
+                  <TableColumn fx:id="Location" prefWidth="75.0" text="Location" />
+                  <TableColumn fx:id="Type" prefWidth="75.0" text="Type" />
+                  <TableColumn fx:id="Start" prefWidth="75.0" text="Start" />
+                  <TableColumn fx:id="End" prefWidth="75.0" text="End" />
+                  <TableColumn fx:id="CustomerID" prefWidth="75.0" text="CustomerID" />
+                  <TableColumn fx:id="UserID" prefWidth="75.0" text="UserID" />
+                  <TableColumn fx:id="ContactID" prefWidth="75.0" text="ContactID" />
               </columns>
             </TableView>
-            <Button layoutX="38.0" layoutY="253.0" mnemonicParsing="false" onAction="#ToAddAppointment" text="ADD" />
-            <Button layoutX="110.0" layoutY="253.0" mnemonicParsing="false" onAction="#ToModifyAppointment" text="MODIFY" />
-            <Button layoutX="260.0" layoutY="253.0" mnemonicParsing="false" onAction="#ToDeleteAppointment" text="DELETE" />
+            <Button layoutX="37.0" layoutY="240.0" mnemonicParsing="false" onAction="#ToAddAppointment" text="ADD" />
+            <Button layoutX="110.0" layoutY="240.0" mnemonicParsing="false" onAction="#ToModifyAppointment" text="MODIFY" />
+            <Button layoutX="262.0" layoutY="240.0" mnemonicParsing="false" onAction="#ToDeleteAppointment" text="DELETE" />
          </children>
       </AnchorPane>
-      <Label fx:id="UpcomingAlert" layoutX="23.0" layoutY="18.0" text="No upcoming appointments in the next 15 min" />
-      <Button layoutX="510.0" layoutY="14.0" mnemonicParsing="false" text="REPORTS" />
-      <Button layoutX="510.0" layoutY="416.0" mnemonicParsing="false" onAction="#ToExitButton" text="EXIT" />
+      <Label fx:id="UpcomingAlert" layoutX="570.0" layoutY="21.0" text="No upcoming appointments in the next 15 min" />
+      <Button layoutX="753.0" layoutY="53.0" mnemonicParsing="false" text="REPORTS" />
+      <Button layoutX="786.0" layoutY="492.0" mnemonicParsing="false" onAction="#ToExitButton" text="EXIT" />
    </children>
 </AnchorPane>
