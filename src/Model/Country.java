@@ -30,4 +30,10 @@ public class Country {
     public void setCountryName(String CountryName) {
         this.CountryName = CountryName;
     }
+
+    //For displaying object in combobox
+    @Override
+    public String toString(){
+        return ("#" + Integer.toString(CountryID) + " " + CountryName);
+    }
 }

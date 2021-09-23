@@ -8,6 +8,8 @@ public class Division {
     private String DivisionName;
     private int CountryID;
     private static ObservableList allDivisions = FXCollections.observableArrayList();
+    private static ObservableList matchedDivisions = FXCollections.observableArrayList();
+
 
     public Division(int DivisionID, String DivisionName, int CountryID) {
         this.DivisionID = DivisionID;
@@ -18,6 +20,9 @@ public class Division {
     public static ObservableList getAllDivisions() {
         return allDivisions;
     }
+    public static ObservableList getMatchedDivisions() { return matchedDivisions; }
+
+
 
     public int getDivisionID() {
         return DivisionID;
@@ -40,4 +45,9 @@ public class Division {
 //    this.CountryID = CountryID;
 //    }
 
+    //For displaying object in combobox
+    @Override
+    public String toString(){
+        return ("#" + Integer.toString(DivisionID) + " " + DivisionName);
+    }
 }

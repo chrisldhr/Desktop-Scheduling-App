@@ -33,10 +33,10 @@ public class AddCustomerFormController implements Initializable {
         String address = AddressText.getText();
         String postal = PostalText.getText();
         String phone = PhoneText.getText();
-        Country country = CountryCombo.getValue();
-        Division division = DivisionCombo.getValue();
+        //Country country = CountryCombo.getValue();
+        int division = DivisionCombo.getValue().getDivisionID();
 
-        //DBCustomers.addCustomer(name,address, postal, phone, country, division);
+        //DBCustomers.addCustomer(name,address, postal, phone, division);
 
 
 
@@ -54,9 +54,18 @@ public class AddCustomerFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         CountryCombo.setItems(DBCountries.getAllCountries());
-        DivisionCombo.setItems(DBDivisions.getAllDivisions());
 
-        //NameText.setCellValueFactory(new PropertyValueFactory<>("Name"));
+
+        CountryCombo.setVisibleRowCount(5);
+        DivisionCombo.setVisibleRowCount(5);
+
+        CountryCombo.setPromptText("Choose a country");
+        DivisionCombo.setPromptText("Choose a division");
+    }
+
+    public void ToCountryCombo(ActionEvent actionEvent) {
+        int countryID = CountryCombo.getValue().getCountryID();
+        DivisionCombo.setItems(DBDivisions.getMatchedDivisions(countryID));
 
     }
 }
