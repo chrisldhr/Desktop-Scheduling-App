@@ -40,4 +40,9 @@ public class DBAppointments {
 
         return appointments;
     }
+
+    public static void addAppointment(int AppointmentID, String Title, String Description, String Location, String Type, String Start, String End, int CustomerID, int UserID, int ContactID) {
+
+    }
+
 }

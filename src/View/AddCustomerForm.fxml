@@ -14,12 +14,12 @@
       <Label layoutX="43.0" layoutY="82.0" text="NAME" />
       <Label layoutX="34.0" layoutY="301.0" text="STATE/PROVINCE" />
       <TextField editable="false" focusTraversable="false" layoutX="151.0" layoutY="34.0" promptText="AUTO GENERATED" />
-      <TextField layoutX="151.0" layoutY="78.0" />
-      <TextField layoutX="151.0" layoutY="121.0" />
-      <TextField layoutX="151.0" layoutY="165.0" />
-      <TextField layoutX="151.0" layoutY="214.0" />
-      <ComboBox layoutX="150.0" layoutY="257.0" prefWidth="150.0" />
-      <ComboBox layoutX="150.0" layoutY="297.0" prefWidth="150.0" />
+      <TextField fx:id="NameText" layoutX="151.0" layoutY="78.0" />
+      <TextField fx:id="AddressText" layoutX="151.0" layoutY="121.0" />
+      <TextField fx:id="PostalText" layoutX="151.0" layoutY="165.0" />
+      <TextField fx:id="PhoneText" layoutX="151.0" layoutY="214.0" />
+      <ComboBox fx:id="CountryCombo" layoutX="150.0" layoutY="257.0" prefWidth="150.0" />
+      <ComboBox fx:id="DivisionCombo" layoutX="150.0" layoutY="297.0" prefWidth="150.0" />
       <Button layoutX="55.0" layoutY="353.0" mnemonicParsing="false" onAction="#ToAddButton" text="ADD" />
       <Button layoutX="248.0" layoutY="353.0" mnemonicParsing="false" onAction="#ToCancelButton" text="CANCEL" />
    </children>
