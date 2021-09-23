@@ -28,7 +28,7 @@ public class AddCustomerFormController implements Initializable {
     public ComboBox<Country> CountryCombo;
     public ComboBox<Division> DivisionCombo;
 
-    public void ToAddButton(ActionEvent actionEvent) {
+    public void ToAddButton(ActionEvent actionEvent) throws IOException {
         String name = NameText.getText();
         String address = AddressText.getText();
         String postal = PostalText.getText();
@@ -36,10 +36,14 @@ public class AddCustomerFormController implements Initializable {
         //Country country = CountryCombo.getValue();
         int division = DivisionCombo.getValue().getDivisionID();
 
-        //DBCustomers.addCustomer(name,address, postal, phone, division);
+        DBCustomers.addCustomer(name,address, postal, phone, division);
 
-
-
+        Parent root = FXMLLoader.load(getClass().getResource("../view/ScheduleForm.fxml"));
+        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("SCHEDULER");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void ToCancelButton(ActionEvent actionEvent) throws IOException {
@@ -55,7 +59,6 @@ public class AddCustomerFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         CountryCombo.setItems(DBCountries.getAllCountries());
 
-
         CountryCombo.setVisibleRowCount(5);
         DivisionCombo.setVisibleRowCount(5);
 
@@ -66,6 +69,5 @@ public class AddCustomerFormController implements Initializable {
     public void ToCountryCombo(ActionEvent actionEvent) {
         int countryID = CountryCombo.getValue().getCountryID();
         DivisionCombo.setItems(DBDivisions.getMatchedDivisions(countryID));
-
     }
 }

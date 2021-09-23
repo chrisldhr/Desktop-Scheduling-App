@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DBCustomers {
     public static ObservableList<Customer> getAllCustomers () {
@@ -37,4 +38,33 @@ public class DBCustomers {
 
         return customers;
     }
+
+    public static void addCustomer(String name,String address, String postal, String phone, int division) {
+        try {
+//            String sqlac = "INSERT INTO customers VALUES(NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+//            PreparedStatement psac = JDBC.getConnection().prepareStatement(sqlac);
+//            psac.setString(1, name);
+//            psac.setString(2, address);
+//            psac.setString(3, postal);
+//            psac.setString(4, phone);
+//            psac.setString(5, "NOW()");
+//            psac.setString(6, "script");
+//            psac.setString(7, "NOW()");
+//            psac.setString(8, "script");
+//            psac.setInt(9, division);
+//
+//            psac.execute();
+
+//            ResultSet rs = psac.getGeneratedKeys();
+//            rs.next();
+            Statement statement = JDBC.getConnection().createStatement();
+            String queryCustomer = "INSERT INTO customers SET Customer_Name='" + name + "', Address='" + address + "', Postal='" + postal + "', Phone='" + phone + "', Create_Date=NOW(), Script='script', Last_Update=NOW(), Last_Updated_By='script', Division_ID='" + division + "'";
+            statement.executeUpdate(queryCustomer);
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
+
 }
