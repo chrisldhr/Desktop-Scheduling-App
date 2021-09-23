@@ -41,25 +41,17 @@ public class DBCustomers {
 
     public static void addCustomer(String name,String address, String postal, String phone, int division) {
         try {
-//            String sqlac = "INSERT INTO customers VALUES(NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-//            PreparedStatement psac = JDBC.getConnection().prepareStatement(sqlac);
-//            psac.setString(1, name);
-//            psac.setString(2, address);
-//            psac.setString(3, postal);
-//            psac.setString(4, phone);
-//            psac.setString(5, "NOW()");
-//            psac.setString(6, "script");
-//            psac.setString(7, "NOW()");
-//            psac.setString(8, "script");
-//            psac.setInt(9, division);
-//
-//            psac.execute();
+            String sqlac = "INSERT INTO customers VALUES(NULL, ?, ?, ?, ?, CURRENT_TIMESTAMP, 'script', CURRENT_TIMESTAMP, 'script', ?)";
+            PreparedStatement psac = JDBC.getConnection().prepareStatement(sqlac);
+            psac.setString(1, name);
+            psac.setString(2, address);
+            psac.setString(3, postal);
+            psac.setString(4, phone);
+            psac.setInt(5, division);
 
-//            ResultSet rs = psac.getGeneratedKeys();
-//            rs.next();
-            Statement statement = JDBC.getConnection().createStatement();
-            String queryCustomer = "INSERT INTO customers SET Customer_Name='" + name + "', Address='" + address + "', Postal='" + postal + "', Phone='" + phone + "', Create_Date=NOW(), Script='script', Last_Update=NOW(), Last_Updated_By='script', Division_ID='" + division + "'";
-            statement.executeUpdate(queryCustomer);
+            psac.execute();
+
+
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
