@@ -17,10 +17,10 @@ public class Division {
         this.CountryID = CountryID;
     }
 
-    public static ObservableList getAllDivisions() {
-        return allDivisions;
-    }
-    public static ObservableList getMatchedDivisions() { return matchedDivisions; }
+//    public static ObservableList getAllDivisions() {
+//        return allDivisions;
+//    }
+//    public static ObservableList getMatchedDivisions() { return matchedDivisions; }
 
 
 
@@ -38,12 +38,12 @@ public class Division {
         this.DivisionName = DivisionName;
     }
 
-//    public int getCountryID() {
-//        return CountryID;
-//    }
-//    public void setCountryID(int CountryID) {
-//    this.CountryID = CountryID;
-//    }
+    public int getCountryID() {
+        return CountryID;
+    }
+    public void setCountryID(int CountryID) {
+    this.CountryID = CountryID;
+    }
 
     //For displaying object in combobox
     @Override

@@ -37,7 +37,7 @@ public class Customer {
     public void setPhone(String Phone) { this.Phone = Phone; }
     public void setDivisionID(int DivisionID) { this.DivisionID = DivisionID; }
 
-    public static ObservableList getAllAppointments() {
+    public static ObservableList getAllCustomers() {
         return allCustomers;
     }
 }

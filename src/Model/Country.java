@@ -27,9 +27,7 @@ public class Country {
     public String getCountryName() {
         return CountryName;
     }
-    public void setCountryName(String CountryName) {
-        this.CountryName = CountryName;
-    }
+    public void setCountryName(String CountryName) { this.CountryName = CountryName; }
 
     //For displaying object in combobox
     @Override

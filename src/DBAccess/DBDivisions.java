@@ -30,7 +30,6 @@ public class DBDivisions {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
         return dlist;
     }
 
@@ -53,8 +52,6 @@ public class DBDivisions {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
-
         return matchedList;
     }
 }

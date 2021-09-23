@@ -20,6 +20,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ScheduleFormController implements Initializable {
+    private static Customer modifyingCustomer;
     public TableView <Appointment> ScheduleTable;
     public TableColumn AppointmentID;
     public TableColumn Title;
@@ -38,6 +39,10 @@ public class ScheduleFormController implements Initializable {
     public TableColumn Postal;
     public TableColumn Phone;
     public TableColumn DivisionID;
+
+    public static Customer getModifyingCustomer() {
+        return modifyingCustomer;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -78,6 +83,8 @@ public class ScheduleFormController implements Initializable {
     }
 
     public void ToModifyCustomer(ActionEvent actionEvent) throws IOException {
+        modifyingCustomer = CustomerTable.getSelectionModel().getSelectedItem();
+
         Parent root = FXMLLoader.load(getClass().getResource("../view/ModifyCustomerForm.fxml"));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
