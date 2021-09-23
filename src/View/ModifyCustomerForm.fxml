@@ -18,8 +18,8 @@
         <TextField fx:id="AddressText" layoutX="151.0" layoutY="121.0" />
         <TextField fx:id="PostalText" layoutX="151.0" layoutY="165.0" />
         <TextField fx:id="PhoneText" layoutX="151.0" layoutY="214.0" />
-        <ComboBox fx:id="CountryCombo" layoutX="150.0" layoutY="257.0" prefWidth="150.0" />
-        <ComboBox fx:id="DivisionCombo" layoutX="150.0" layoutY="297.0" prefWidth="150.0" />
+        <ComboBox fx:id="CountryCombo" layoutX="150.0" layoutY="257.0" onAction="#ToCountryCombo" prefWidth="150.0" promptText="Choose a country" />
+        <ComboBox fx:id="DivisionCombo" layoutX="150.0" layoutY="297.0" prefWidth="150.0" promptText="Choose a division" />
         <Button layoutX="55.0" layoutY="353.0" mnemonicParsing="false" onAction="#ToModifyButton" text="MODIFY" />
         <Button layoutX="248.0" layoutY="353.0" mnemonicParsing="false" onAction="#ToCancelButton" text="CANCEL" />
       <TableView layoutX="341.0" layoutY="65.0" prefHeight="200.0" prefWidth="200.0">

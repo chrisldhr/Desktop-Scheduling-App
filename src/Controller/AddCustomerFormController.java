@@ -62,12 +62,11 @@ public class AddCustomerFormController implements Initializable {
         CountryCombo.setVisibleRowCount(5);
         DivisionCombo.setVisibleRowCount(5);
 
-        CountryCombo.setPromptText("Choose a country");
-        DivisionCombo.setPromptText("Choose a division");
     }
 
     public void ToCountryCombo(ActionEvent actionEvent) {
         int countryID = CountryCombo.getValue().getCountryID();
         DivisionCombo.setItems(DBDivisions.getMatchedDivisions(countryID));
+        //DivisionCombo.setPromptText("Choose a division");
     }
 }

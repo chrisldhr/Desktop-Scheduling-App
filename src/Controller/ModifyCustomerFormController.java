@@ -47,6 +47,9 @@ public class ModifyCustomerFormController implements Initializable {
         CountryCombo.setItems(DBCountries.getAllCountries());
         DivisionCombo.setItems(DBDivisions.getAllDivisions());
 
+        CountryCombo.setVisibleRowCount(5);
+        DivisionCombo.setVisibleRowCount(5);
+
         IDText.setText(String.valueOf(Selected.getCustomerID()));
         NameText.setText(Selected.getName());
         AddressText.setText(String.valueOf(Selected.getAddress()));
@@ -62,6 +65,18 @@ public class ModifyCustomerFormController implements Initializable {
         }
 
         int countryID = DivisionCombo.getValue().getCountryID();
-        CountryCombo.setValue(DBCountries.getMatchedCountry(countryID));
+        for (int i=0; i < CountryCombo.getItems().size(); i++) {
+            Country country = CountryCombo.getItems().get(i);
+            if (country.getCountryID() == countryID) {
+                CountryCombo.setValue(country);
+                break;
+            }
+        }
+//        CountryCombo.setValue(DBCountries.getMatchedCountry(countryID));
+    }
+
+    public void ToCountryCombo(ActionEvent actionEvent) {
+        int countryID = CountryCombo.getValue().getCountryID();
+        DivisionCombo.setItems(DBDivisions.getMatchedDivisions(countryID));
     }
 }
