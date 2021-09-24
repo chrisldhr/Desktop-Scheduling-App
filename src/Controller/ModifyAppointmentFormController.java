@@ -1,5 +1,6 @@
 package Controller;
 
+import DBAccess.DBAppointments;
 import DBAccess.DBContacts;
 import DBAccess.DBCustomers;
 import DBAccess.DBUsers;
@@ -17,6 +18,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
@@ -34,8 +38,33 @@ public class ModifyAppointmentFormController implements Initializable {
     public ComboBox<Customer> CustomerCombo;
     public ComboBox<User> UserCombo;
 
-    public void ToModifyButton(ActionEvent actionEvent) {
+    public void ToModifyButton(ActionEvent actionEvent) throws IOException {
+        int appointmentID = Integer.parseInt(IDText.getText());
+        String title = TitleText.getText();
+        String description = DescriptionText.getText();
+        String location = LocationText.getText();
+        String type = TypeText.getText();
+        LocalTime startTime = StartCombo.getValue();
+        LocalTime endTime = EndCombo.getValue();
+        int customerID = CustomerCombo.getValue().getCustomerID();
+        int userID = UserCombo.getValue().getUserID();
+        int contactID = ContactCombo.getValue().getContactID();
 
+        LocalDate date = DatePicker.getValue();
+        LocalDateTime startDateTime = LocalDateTime.of(date, startTime);
+        LocalDateTime endDateTime = LocalDateTime.of(date, endTime);
+
+        Timestamp startTimestamp = Timestamp.valueOf(startDateTime);
+        Timestamp endTimestamp = Timestamp.valueOf(endDateTime);
+
+        DBAppointments.modifyAppointment(appointmentID, title, description, location, type, startTimestamp, endTimestamp, customerID, userID, contactID);
+
+        Parent root = FXMLLoader.load(getClass().getResource("../view/ScheduleForm.fxml"));
+        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("SCHEDULER");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void ToCancelButton(ActionEvent actionEvent) throws IOException {

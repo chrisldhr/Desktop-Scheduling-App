@@ -61,4 +61,25 @@ public class DBAppointments {
             throwables.printStackTrace();
         }
     }
+
+    public static void modifyAppointment(int appointmentID, String title, String description, String location, String type, Timestamp startTimestamp, Timestamp endTimestamp, int customerID, int userID, int contactID) {
+        try {
+            String sqlma = "UPDATE appointments SET Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Create_Date = CURRENT_TIMESTAMP, Created_By = 'script', Last_Update = CURRENT_TIMESTAMP, Last_Updated_By = 'script', Customer_ID = ?, User_ID = ?, Contact_ID = ? WHERE Appointment_ID = ?";
+            PreparedStatement psma = JDBC.getConnection().prepareStatement(sqlma);
+            psma.setString(1, title);
+            psma.setString(2, description);
+            psma.setString(3, location);
+            psma.setString(4, type);
+            psma.setTimestamp(5, startTimestamp);
+            psma.setTimestamp(6, endTimestamp);
+            psma.setInt(7, customerID);
+            psma.setInt(8, userID);
+            psma.setInt(9, contactID);
+            psma.setInt(10, appointmentID);
+
+            psma.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 }
