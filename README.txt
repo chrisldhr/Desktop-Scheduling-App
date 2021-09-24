@@ -24,3 +24,26 @@ RUBBISH CODE
 //            String queryCustomer = "INSERT INTO customers SET Customer_Name='" + name + "', Address='" + address + "', Postal='" + postal + "', Phone='" + phone + "', Create_Date=NOW(), Script='script', Last_Update=NOW(), Last_Updated_By='script', Division_ID='" + division + "'";
 //            statement.executeUpdate(queryCustomer);
 
+public void ToStartCombo(ActionEvent actionEvent) {
+        LocalTime selectedStart = StartCombo.getValue();
+        LocalTime selectedEnd = LocalTime.of(22,0);
+
+        EndCombo.getItems().clear();
+
+        while(selectedStart.isBefore(selectedEnd)) {
+            EndCombo.getItems().add(selectedStart.plusHours(1));
+            selectedStart = selectedStart.plusHours(1);
+        }
+    }
+
+    public void ToEndCombo(ActionEvent actionEvent) {
+        LocalTime selectedStart = LocalTime.of(8,0);
+        LocalTime selectedEnd = StartCombo.getValue();
+
+        StartCombo.getItems().clear();
+
+        while(selectedStart.isBefore(selectedEnd)) {
+            StartCombo.getItems().add(selectedStart);
+            selectedStart = selectedStart.plusHours(1);
+        }
+    }

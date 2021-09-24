@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ScheduleFormController">
+<AnchorPane prefHeight="550.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ScheduleFormController">
    <children>
       <AnchorPane layoutX="9.0" layoutY="6.0" prefHeight="192.0" prefWidth="558.0" style="-fx-border-color: black; -fx-border-radius: 5;">
          <children>
@@ -11,11 +11,11 @@
             <TableView fx:id="CustomerTable" layoutX="10.0" layoutY="23.0" prefHeight="125.0" prefWidth="538.0">
               <columns>
                 <TableColumn fx:id="CustomerID" prefWidth="32.40001106262207" text="ID" />
-                <TableColumn fx:id="Name" minWidth="0.0" prefWidth="144.99999618530273" text="Name" />
-                  <TableColumn fx:id="Address" prefWidth="179.00001525878906" text="Address" />
-                  <TableColumn fx:id="Postal" minWidth="0.0" prefWidth="58.0" text="Postal" />
-                  <TableColumn fx:id="Phone" prefWidth="54.0" text="Phone" />
-                  <TableColumn fx:id="DivisionID" prefWidth="71.5999755859375" text="DivisionID" />
+                <TableColumn fx:id="Name" minWidth="0.0" prefWidth="128.60001373291016" text="Name" />
+                  <TableColumn fx:id="Address" prefWidth="146.1999969482422" text="Address" />
+                  <TableColumn fx:id="Postal" minWidth="0.0" prefWidth="41.600006103515625" text="Postal" />
+                  <TableColumn fx:id="Phone" prefWidth="95.00003051757812" text="Phone" />
+                  <TableColumn fx:id="DivisionID" prefWidth="101.0" text="DivisionID" />
               </columns>
             </TableView>
             <Button layoutX="14.0" layoutY="152.0" mnemonicParsing="false" onAction="#ToAddCustomer" text="ADD" />
@@ -33,11 +33,11 @@
                   <TableColumn fx:id="Description" prefWidth="74.80001831054688" text="Description" />
                   <TableColumn fx:id="Location" prefWidth="75.0" text="Location" />
                   <TableColumn fx:id="Type" prefWidth="75.0" text="Type" />
-                  <TableColumn fx:id="Start" prefWidth="75.0" text="Start" />
-                  <TableColumn fx:id="End" prefWidth="75.0" text="End" />
-                  <TableColumn fx:id="ApptCustomerID" prefWidth="75.0" text="CustomerID" />
-                  <TableColumn fx:id="UserID" prefWidth="75.0" text="UserID" />
-                  <TableColumn fx:id="ContactID" prefWidth="75.0" text="ContactID" />
+                  <TableColumn fx:id="Start" prefWidth="121.20001220703125" text="Start" />
+                  <TableColumn fx:id="End" prefWidth="119.5999755859375" text="End" />
+                  <TableColumn fx:id="ApptCustomerID" prefWidth="76.20001220703125" text="CustomerID" />
+                  <TableColumn fx:id="UserID" prefWidth="46.0" text="UserID" />
+                  <TableColumn fx:id="ContactID" prefWidth="69.0" text="ContactID" />
               </columns>
             </TableView>
             <Button layoutX="37.0" layoutY="240.0" mnemonicParsing="false" onAction="#ToAddAppointment" text="ADD" />

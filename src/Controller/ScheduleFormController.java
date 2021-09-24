@@ -47,6 +47,7 @@ public class ScheduleFormController implements Initializable {
     public static Customer getModifyingCustomer() {
         return modifyingCustomer;
     }
+    public static Appointment getModifyingAppointment() { return modifyingAppointment; }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -124,6 +125,8 @@ public class ScheduleFormController implements Initializable {
     }
 
     public void ToModifyAppointment(ActionEvent actionEvent) throws IOException {
+        modifyingAppointment = AppointmentTable.getSelectionModel().getSelectedItem();
+
         Parent root = FXMLLoader.load(getClass().getResource("../view/ModifyAppointmentForm.fxml"));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);

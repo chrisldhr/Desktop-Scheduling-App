@@ -57,10 +57,10 @@ public class AddAppointmentFormController implements Initializable {
         LocalDateTime startDateTime = LocalDateTime.of(date, startTime);
         LocalDateTime endDateTime = LocalDateTime.of(date, endTime);
 
-        Timestamp startSQL = Timestamp.valueOf(startDateTime);
-        Timestamp endSQL = Timestamp.valueOf(endDateTime);
+        Timestamp startTimestamp = Timestamp.valueOf(startDateTime);
+        Timestamp endTimestamp = Timestamp.valueOf(endDateTime);
 
-        DBAppointments.addAppointment(title, description, location, type, startSQL, endSQL, customerID, userID, contactID);
+        DBAppointments.addAppointment(title, description, location, type, startTimestamp, endTimestamp, customerID, userID, contactID);
 
         Parent root = FXMLLoader.load(getClass().getResource("../view/ScheduleForm.fxml"));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
@@ -104,5 +104,8 @@ public class AddAppointmentFormController implements Initializable {
         StartCombo.setVisibleRowCount(5);
         EndCombo.setVisibleRowCount(5);
 
+    }
+
+    public void ToModifyButton(ActionEvent actionEvent) {
     }
 }
