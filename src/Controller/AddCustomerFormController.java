@@ -33,7 +33,6 @@ public class AddCustomerFormController implements Initializable {
         String address = AddressText.getText();
         String postal = PostalText.getText();
         String phone = PhoneText.getText();
-        //Country country = CountryCombo.getValue();
         int division = DivisionCombo.getValue().getDivisionID();
 
         DBCustomers.addCustomer(name,address, postal, phone, division);

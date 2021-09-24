@@ -1,6 +1,7 @@
 package Controller;
 
 import DBAccess.DBCountries;
+import DBAccess.DBCustomers;
 import DBAccess.DBDivisions;
 import Model.Country;
 import Model.Customer;
@@ -29,7 +30,22 @@ public class ModifyCustomerFormController implements Initializable {
     public ComboBox<Division> DivisionCombo;
     public Customer Selected;
 
-    public void ToModifyButton(ActionEvent actionEvent) {
+    public void ToModifyButton(ActionEvent actionEvent) throws IOException {
+        int id = Integer.parseInt(IDText.getText());
+        String name = NameText.getText();
+        String address = AddressText.getText();
+        String postal = PostalText.getText();
+        String phone = PhoneText.getText();
+        int division = DivisionCombo.getValue().getDivisionID();
+
+        DBCustomers.modifyCustomer(id, name,address, postal, phone, division);
+
+        Parent root = FXMLLoader.load(getClass().getResource("../view/ScheduleForm.fxml"));
+        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("SCHEDULER");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void ToCancelButton(ActionEvent actionEvent) throws IOException {

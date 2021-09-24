@@ -51,12 +51,26 @@ public class DBCustomers {
 
             psac.execute();
 
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 
+    public static void modifyCustomer(int id, String name, String address, String postal, String phone, int division) {
+        try {
+            String sqlmc = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Create_Date = CURRENT_TIMESTAMP, Created_By = 'script', Last_Update = CURRENT_TIMESTAMP, Last_Updated_By = 'script', Division_ID = ? WHERE Customer_ID = ?";
+            PreparedStatement psmc = JDBC.getConnection().prepareStatement(sqlmc);
+            psmc.setString(1, name);
+            psmc.setString(2, address);
+            psmc.setString(3, postal);
+            psmc.setString(4, phone);
+            psmc.setInt(5, division);
+            psmc.setInt(6, id);
+
+            psmc.execute();
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
     }
-
 }
