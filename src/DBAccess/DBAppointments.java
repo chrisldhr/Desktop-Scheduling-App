@@ -82,4 +82,16 @@ public class DBAppointments {
             throwables.printStackTrace();
         }
     }
+
+    public static void deleteAppointment(int appointmentID) {
+        try {
+        String sqlda = "DELETE FROM appointments WHERE Appointment_ID = ?";
+        PreparedStatement psda = JDBC.getConnection().prepareStatement(sqlda);
+        psda.setInt(1, appointmentID);
+
+        psda.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 }

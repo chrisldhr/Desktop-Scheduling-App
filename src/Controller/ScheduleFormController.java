@@ -140,6 +140,19 @@ public class ScheduleFormController implements Initializable {
         int appointmentID = modifyingAppointment.getAppointmentID();
         String appointmentType = modifyingAppointment.getType();
 
-        RemoveAppointmentLabel.setText("Appointment ID " + appointmentID + " " + appointmentType +  " Removed");
+        DBAppointments.deleteAppointment(appointmentID);
+        RemoveAppointmentLabel.setText("Appointment #" + appointmentID + " [" + appointmentType +  "] Was Removed");
+
+        AppointmentTable.setItems(DBAppointments.getAllAppointments());
+        AppointmentID.setCellValueFactory(new PropertyValueFactory<>("AppointmentID"));
+        Title.setCellValueFactory(new PropertyValueFactory<>("Title"));
+        Description.setCellValueFactory(new PropertyValueFactory<>("Description"));
+        Location.setCellValueFactory(new PropertyValueFactory<>("Location"));
+        Type.setCellValueFactory(new PropertyValueFactory<>("Type"));
+        Start.setCellValueFactory(new PropertyValueFactory<>("Start"));
+        End.setCellValueFactory(new PropertyValueFactory<>("End"));
+        ApptCustomerID.setCellValueFactory(new PropertyValueFactory<>("CustomerID"));
+        UserID.setCellValueFactory(new PropertyValueFactory<>("UserID"));
+        ContactID.setCellValueFactory(new PropertyValueFactory<>("ContactID"));
     }
 }
