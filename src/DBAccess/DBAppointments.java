@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 public class DBAppointments {
     public static ObservableList<Appointment> getAllAppointments () {
@@ -26,8 +27,8 @@ public class DBAppointments {
                 String Description = rs.getString("Description");
                 String Location = rs.getString("Location");
                 String Type = rs.getString("Type");
-                String Start = rs.getString("Start");
-                String End = rs.getString("End");
+                Timestamp Start = rs.getTimestamp("Start");
+                Timestamp End = rs.getTimestamp("End");
                 int CustomerID = rs.getInt("Customer_ID");
                 int UserID = rs.getInt("User_ID");
                 int ContactID = rs.getInt("Contact_ID");
@@ -41,8 +42,23 @@ public class DBAppointments {
         return appointments;
     }
 
-    public static void addAppointment(int AppointmentID, String Title, String Description, String Location, String Type, String Start, String End, int CustomerID, int UserID, int ContactID) {
+    public static void addAppointment(String Title, String Description, String Location, String Type, Timestamp Start, Timestamp End, int CustomerID, int UserID, int ContactID) {
+        try {
+            String sqlaa = "INSERT INTO appointments VALUES(NULL, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 'script', CURRENT_TIMESTAMP, 'script', ?, ?, ?)";
+            PreparedStatement psaa = JDBC.getConnection().prepareStatement(sqlaa);
+            psaa.setString(1, Title);
+            psaa.setString(2, Description);
+            psaa.setString(3, Location);
+            psaa.setString(4, Type);
+            psaa.setTimestamp(5, Start);
+            psaa.setTimestamp(6, End);
+            psaa.setInt(7, CustomerID);
+            psaa.setInt(8, UserID);
+            psaa.setInt(9, ContactID);
 
+            psaa.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
-
 }

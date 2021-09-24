@@ -3,20 +3,22 @@ package Model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.sql.Timestamp;
+
 public class Appointment {
     private int AppointmentID;
     private String Title;
     private String Description;
     private String Location;
     private String Type;
-    private String Start;
-    private String End;
+    private Timestamp Start;
+    private Timestamp End;
     private int CustomerID;
     private int UserID;
     private int ContactID;
     private static ObservableList allAppointments = FXCollections.observableArrayList();
 
-    public Appointment(int AppointmentID, String Title, String Description, String Location, String Type, String Start, String End, int CustomerID, int UserID, int ContactID) {
+    public Appointment(int AppointmentID, String Title, String Description, String Location, String Type, Timestamp Start, Timestamp End, int CustomerID, int UserID, int ContactID) {
         this.AppointmentID = AppointmentID;
         this.Title = Title;
         this.Description = Description;
@@ -35,8 +37,8 @@ public class Appointment {
     public String getDescription() { return Description; }
     public String getLocation() { return Location; }
     public String getType() { return Type; }
-    public String getStart() { return Start; }
-    public String getEnd() { return End; }
+    public Timestamp getStart() { return Start; }
+    public Timestamp getEnd() { return End; }
     public int getCustomerID() { return CustomerID; }
     public int getUserID() { return UserID; }
     public int getContactID() { return ContactID; }
@@ -47,8 +49,8 @@ public class Appointment {
     public void setDescription(String Description) { this.Description = Description; }
     public void setLocation(String Location) { this.Location = Location; }
     public void setType(String Type) { this.Type = Type; }
-    public void setStart(String Start) { this.Start = Start; }
-    public void setEnd(String End) { this.End = End; }
+    public void setStart(Timestamp Start) { this.Start = Start; }
+    public void setEnd(Timestamp End) { this.End = End; }
     public void setCustomerID(int CustomerID) { this.CustomerID = CustomerID; }
     public void setUserID(int UserID) { this.UserID = UserID; }
     public void setContactID(int ContactID) { this.ContactID = ContactID; }

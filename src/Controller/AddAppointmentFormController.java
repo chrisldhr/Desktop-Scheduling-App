@@ -1,9 +1,10 @@
 package Controller;
 
-import DBAccess.DBContacts;
-import DBAccess.DBCountries;
-import DBAccess.DBCustomers;
-import DBAccess.DBUsers;
+import DBAccess.*;
+import Model.Appointment;
+import Model.Contact;
+import Model.Customer;
+import Model.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,6 +20,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
@@ -30,16 +34,40 @@ public class AddAppointmentFormController implements Initializable {
     public TextField TitleText;
     public TextField DescriptionText;
     public TextField LocationText;
-    public ComboBox ContactCombo;
+    public ComboBox<Contact> ContactCombo;
     public javafx.scene.control.DatePicker DatePicker;
-    public ComboBox StartCombo;
-    public ComboBox EndCombo;
-    public ComboBox CustomerCombo;
-    public ComboBox UserCombo;
-    private static ObservableList allTimes = FXCollections.observableArrayList();
+    public ComboBox<LocalTime> StartCombo;
+    public ComboBox<LocalTime> EndCombo;
+    public ComboBox<Customer> CustomerCombo;
+    public ComboBox<User> UserCombo;
+    //private static ObservableList allTimes = FXCollections.observableArrayList();
 
+    public void ToAddButton(ActionEvent actionEvent) throws IOException {
+        String title = TitleText.getText();
+        String description = DescriptionText.getText();
+        String location = LocationText.getText();
+        String type = TypeText.getText();
+        LocalTime startTime = StartCombo.getValue();
+        LocalTime endTime = EndCombo.getValue();
+        int customerID = CustomerCombo.getValue().getCustomerID();
+        int userID = UserCombo.getValue().getUserID();
+        int contactID = ContactCombo.getValue().getContactID();
 
-    public void ToAddButton(ActionEvent actionEvent) {
+        LocalDate date = DatePicker.getValue();
+        LocalDateTime startDateTime = LocalDateTime.of(date, startTime);
+        LocalDateTime endDateTime = LocalDateTime.of(date, endTime);
+
+        Timestamp startSQL = Timestamp.valueOf(startDateTime);
+        Timestamp endSQL = Timestamp.valueOf(endDateTime);
+
+        DBAppointments.addAppointment(title, description, location, type, startSQL, endSQL, customerID, userID, contactID);
+
+        Parent root = FXMLLoader.load(getClass().getResource("../view/ScheduleForm.fxml"));
+        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("SCHEDULER");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void ToCancelButton(ActionEvent actionEvent) throws IOException {
