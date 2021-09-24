@@ -94,6 +94,18 @@ public class ScheduleFormController implements Initializable {
     }
 
     public void ToDeleteCustomer(ActionEvent actionEvent) {
+        modifyingCustomer = CustomerTable.getSelectionModel().getSelectedItem();
+        int customerID = modifyingCustomer.getCustomerID();
+
+        DBCustomers.deleteCustomer(customerID);
+
+        CustomerTable.setItems(DBCustomers.getAllCustomers());
+        CustomerID.setCellValueFactory(new PropertyValueFactory<>("CustomerID"));
+        Name.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        Address.setCellValueFactory(new PropertyValueFactory<>("Address"));
+        Postal.setCellValueFactory(new PropertyValueFactory<>("Postal"));
+        Phone.setCellValueFactory(new PropertyValueFactory<>("Phone"));
+        DivisionID.setCellValueFactory(new PropertyValueFactory<>("DivisionID"));
     }
 
     public void ToAddAppointment(ActionEvent actionEvent) throws IOException {

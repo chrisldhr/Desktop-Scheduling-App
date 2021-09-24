@@ -73,4 +73,23 @@ public class DBCustomers {
             throwables.printStackTrace();
         }
     }
+
+    public static void deleteCustomer(int customerID) {
+        try {
+            String sqlda = "DELETE FROM appointments WHERE Customer_ID = ?";
+            PreparedStatement psda = JDBC.getConnection().prepareStatement(sqlda);
+            psda.setInt(1, customerID);
+
+            psda.execute();
+
+            String sqldc = "DELETE FROM customers WHERE Customer_ID = ?";
+            PreparedStatement psdc = JDBC.getConnection().prepareStatement(sqldc);
+            psdc.setInt(1, customerID);
+
+            psdc.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 }
