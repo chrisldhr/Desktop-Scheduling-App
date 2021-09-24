@@ -40,5 +40,11 @@ public class Customer {
     public static ObservableList getAllCustomers() {
         return allCustomers;
     }
+
+    //For displaying object in combobox
+    @Override
+    public String toString(){
+        return ("#" + Integer.toString(CustomerID) + " " + Name);
+    }
 }
 

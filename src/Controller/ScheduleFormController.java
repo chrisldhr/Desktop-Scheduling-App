@@ -22,7 +22,8 @@ import java.util.ResourceBundle;
 
 public class ScheduleFormController implements Initializable {
     private static Customer modifyingCustomer;
-    public TableView <Appointment> ScheduleTable;
+    private static Appointment modifyingAppointment;
+    public TableView <Appointment> AppointmentTable;
     public TableColumn AppointmentID;
     public TableColumn Title;
     public TableColumn Description;
@@ -41,6 +42,7 @@ public class ScheduleFormController implements Initializable {
     public TableColumn Phone;
     public TableColumn DivisionID;
     public Label RemoveCustomerLabel;
+    public Label RemoveAppointmentLabel;
 
     public static Customer getModifyingCustomer() {
         return modifyingCustomer;
@@ -48,7 +50,7 @@ public class ScheduleFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ScheduleTable.setItems(DBAppointments.getAllAppointments());
+        AppointmentTable.setItems(DBAppointments.getAllAppointments());
         AppointmentID.setCellValueFactory(new PropertyValueFactory<>("AppointmentID"));
         Title.setCellValueFactory(new PropertyValueFactory<>("Title"));
         Description.setCellValueFactory(new PropertyValueFactory<>("Description"));
@@ -131,5 +133,10 @@ public class ScheduleFormController implements Initializable {
     }
 
     public void ToDeleteAppointment(ActionEvent actionEvent) {
+        modifyingAppointment = AppointmentTable.getSelectionModel().getSelectedItem();
+        int appointmentID = modifyingAppointment.getAppointmentID();
+        String appointmentType = modifyingAppointment.getType();
+
+        RemoveAppointmentLabel.setText("Appointment ID " + appointmentID + " " + appointmentType +  " Removed");
     }
 }
