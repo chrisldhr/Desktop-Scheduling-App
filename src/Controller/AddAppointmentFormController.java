@@ -4,6 +4,8 @@ import DBAccess.DBContacts;
 import DBAccess.DBCountries;
 import DBAccess.DBCustomers;
 import DBAccess.DBUsers;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,6 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class AddAppointmentFormController implements Initializable {
@@ -33,6 +36,8 @@ public class AddAppointmentFormController implements Initializable {
     public ComboBox EndCombo;
     public ComboBox CustomerCombo;
     public ComboBox UserCombo;
+    private static ObservableList allTimes = FXCollections.observableArrayList();
+
 
     public void ToAddButton(ActionEvent actionEvent) {
     }
@@ -55,5 +60,21 @@ public class AddAppointmentFormController implements Initializable {
         ContactCombo.setVisibleRowCount(5);
         CustomerCombo.setVisibleRowCount(5);
         UserCombo.setVisibleRowCount(5);
+
+        LocalTime start = LocalTime.of(8, 0);
+        LocalTime end = LocalTime.of(22,0);
+
+        while(start.isBefore(end)) {
+            StartCombo.getItems().add(start);
+            EndCombo.getItems().add(start.plusHours(1));
+            start = start.plusHours(1);
+        }
+
+        StartCombo.getSelectionModel().select(LocalTime.of(8,0));
+        EndCombo.getSelectionModel().select(LocalTime.of(9,0));
+
+        StartCombo.setVisibleRowCount(5);
+        EndCombo.setVisibleRowCount(5);
+
     }
 }
