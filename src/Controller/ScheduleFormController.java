@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -39,6 +40,7 @@ public class ScheduleFormController implements Initializable {
     public TableColumn Postal;
     public TableColumn Phone;
     public TableColumn DivisionID;
+    public Label RemoveCustomerLabel;
 
     public static Customer getModifyingCustomer() {
         return modifyingCustomer;
@@ -106,6 +108,8 @@ public class ScheduleFormController implements Initializable {
         Postal.setCellValueFactory(new PropertyValueFactory<>("Postal"));
         Phone.setCellValueFactory(new PropertyValueFactory<>("Phone"));
         DivisionID.setCellValueFactory(new PropertyValueFactory<>("DivisionID"));
+
+        RemoveCustomerLabel.setText("Customer Removed");
     }
 
     public void ToAddAppointment(ActionEvent actionEvent) throws IOException {
