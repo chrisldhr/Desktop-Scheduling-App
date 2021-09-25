@@ -55,12 +55,16 @@ public class DBAppointments {
         try {
             String sqlaa = "INSERT INTO appointments VALUES(NULL, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 'script', CURRENT_TIMESTAMP, 'script', ?, ?, ?)";
             PreparedStatement psaa = JDBC.getConnection().prepareStatement(sqlaa);
+
+            Timestamp StartUTC = convertToUTC(Start);
+            Timestamp EndUTC = convertToUTC(End);
+
             psaa.setString(1, Title);
             psaa.setString(2, Description);
             psaa.setString(3, Location);
             psaa.setString(4, Type);
-            psaa.setTimestamp(5, Start);
-            psaa.setTimestamp(6, End);
+            psaa.setTimestamp(5, StartUTC);
+            psaa.setTimestamp(6, EndUTC);
             psaa.setInt(7, CustomerID);
             psaa.setInt(8, UserID);
             psaa.setInt(9, ContactID);
@@ -75,12 +79,16 @@ public class DBAppointments {
         try {
             String sqlma = "UPDATE appointments SET Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Create_Date = CURRENT_TIMESTAMP, Created_By = 'script', Last_Update = CURRENT_TIMESTAMP, Last_Updated_By = 'script', Customer_ID = ?, User_ID = ?, Contact_ID = ? WHERE Appointment_ID = ?";
             PreparedStatement psma = JDBC.getConnection().prepareStatement(sqlma);
+
+            Timestamp StartUTC = convertToUTC(startTimestamp);
+            Timestamp EndUTC = convertToUTC(endTimestamp);
+
             psma.setString(1, title);
             psma.setString(2, description);
             psma.setString(3, location);
             psma.setString(4, type);
-            psma.setTimestamp(5, startTimestamp);
-            psma.setTimestamp(6, endTimestamp);
+            psma.setTimestamp(5, StartUTC);
+            psma.setTimestamp(6, EndUTC);
             psma.setInt(7, customerID);
             psma.setInt(8, userID);
             psma.setInt(9, contactID);
