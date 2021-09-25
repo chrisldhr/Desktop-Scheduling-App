@@ -47,9 +47,9 @@ public class ModifyAppointmentFormController implements Initializable {
     public static LocalDateTime endDateTime;
     public static Timestamp startTimestamp;
     public static Timestamp endTimestamp;
+    public static int appointmentID;
 
     public void ToModifyButton(ActionEvent actionEvent) throws IOException {
-        int appointmentID = Integer.parseInt(IDText.getText());
         String title = TitleText.getText();
         String description = DescriptionText.getText();
         String location = LocationText.getText();
@@ -59,6 +59,7 @@ public class ModifyAppointmentFormController implements Initializable {
         int userID = UserCombo.getValue().getUserID();
         int contactID = ContactCombo.getValue().getContactID();
 
+        appointmentID = Integer.parseInt(IDText.getText());
         date = DatePicker.getValue();
         customerID = CustomerCombo.getValue().getCustomerID();
         startDateTime = LocalDateTime.of(date, startTime);
@@ -74,7 +75,7 @@ public class ModifyAppointmentFormController implements Initializable {
             alert.setTitle("OUTSIDE OF BUSINESS HOURS");
             alert.setContentText("Business Hours: 8:00 a.m. to 10:00 p.m. EST, including weekends");
             alert.showAndWait();
-        } else if (DBAppointments.checkOverlap(customerID, startTimestamp, endTimestamp)) {
+        } else if (DBAppointments.checkOverlap(customerID, startTimestamp, endTimestamp, appointmentID)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("OVERLAPPING APPOINTMENTS");
             alert.setContentText("This customer already has an appointment at the time");

@@ -117,19 +117,26 @@ public class DBAppointments {
         return Timestamp.valueOf(local.toLocalDateTime().atZone(localZone).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime());
     }
 
-    public static Boolean checkOverlap(int customerID, Timestamp start, Timestamp end) {
+    public static Boolean checkOverlap(int customerID, Timestamp start, Timestamp end, int appointmentID) {
         try {
-            String sqlco = "SELECT * from appointments WHERE Customer_ID = ? AND ? BETWEEN start AND end OR ? < start AND ? > end";
+            String sqlco = "SELECT * from appointments WHERE Customer_ID = ? " +
+                    "AND (? >= start AND ? < end)" +
+                    "AND (? BETWEEN start AND end)" +
+                    "OR (? < start AND ? > end)" +
+                    "AND (Appointment_ID != ?) ";
 
             PreparedStatement psco = JDBC.getConnection().prepareStatement(sqlco);
 
             Timestamp StartUTC = convertToUTC(start);
             Timestamp EndUTC = convertToUTC(end);
 
-            psco.setInt(1, customerID);
-            psco.setTimestamp(2, EndUTC);
+            psco.setInt(1, appointmentID);
+            psco.setTimestamp(2, StartUTC);
             psco.setTimestamp(3, StartUTC);
             psco.setTimestamp(4, EndUTC);
+            psco.setTimestamp(5, StartUTC);
+            psco.setTimestamp(6, EndUTC);
+            psco.setInt(7, customerID);
 
             ResultSet rs = psco.executeQuery();
 

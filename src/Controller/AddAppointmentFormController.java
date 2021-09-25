@@ -73,7 +73,7 @@ public class AddAppointmentFormController implements Initializable {
             alert.setTitle("OUTSIDE OF BUSINESS HOURS");
             alert.setContentText("Business Hours: 8:00 a.m. to 10:00 p.m. EST, including weekends");
             alert.showAndWait();
-        } else if (DBAppointments.checkOverlap(customerID, startTimestamp, endTimestamp)) {
+        } else if (DBAppointments.checkOverlap(customerID, startTimestamp, endTimestamp, 0)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("OVERLAPPING APPOINTMENTS");
             alert.setContentText("This customer already has an appointment at the time");
