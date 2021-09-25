@@ -23,7 +23,7 @@ public class LoginFormController implements Initializable {
     public TextField PasswordText;
     public Label ErrorLabel;
     public Label LocationLabel;
-    public ZoneId localZone;
+    public ZoneId localZone = ZoneId.systemDefault();;
     //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm");
 
     public void ToLoginButton(ActionEvent actionEvent) throws IOException {
@@ -41,7 +41,6 @@ public class LoginFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        localZone = ZoneId.systemDefault();
         LocationLabel.setText(String.valueOf(localZone));
     }
 }

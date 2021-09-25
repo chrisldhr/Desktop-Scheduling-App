@@ -10,8 +10,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 public class DBAppointments {
+    public static ZoneId localZone = ZoneId.systemDefault();
+
+
     public static ObservableList<Appointment> getAllAppointments () {
         ObservableList<Appointment> appointments = FXCollections.observableArrayList();
 
@@ -27,12 +32,16 @@ public class DBAppointments {
                 String Description = rs.getString("Description");
                 String Location = rs.getString("Location");
                 String Type = rs.getString("Type");
-                Timestamp Start = rs.getTimestamp("Start");
-                Timestamp End = rs.getTimestamp("End");
+                Timestamp StartUTC = rs.getTimestamp("Start");
+                Timestamp EndUTC = rs.getTimestamp("End");
                 int CustomerID = rs.getInt("Customer_ID");
                 int UserID = rs.getInt("User_ID");
                 int ContactID = rs.getInt("Contact_ID");
-                Appointment A = new Appointment(AppointmentID, Title, Description, Location, Type, Start, End, CustomerID, UserID, ContactID);
+
+                Timestamp StartLocal = convertToLocal(StartUTC);
+                Timestamp EndLocal = convertToLocal(EndUTC);
+
+                Appointment A = new Appointment(AppointmentID, Title, Description, Location, Type, StartLocal, EndLocal, CustomerID, UserID, ContactID);
                 appointments.add(A);
             }
         } catch (SQLException throwables) {
@@ -93,5 +102,13 @@ public class DBAppointments {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    public static Timestamp convertToLocal(Timestamp utc) {
+        return Timestamp.valueOf(utc.toLocalDateTime().atZone(ZoneId.of("UTC")).withZoneSameInstant(localZone).toLocalDateTime());
+    }
+
+    public static Timestamp convertToUTC (Timestamp local) {
+        return Timestamp.valueOf(local.toLocalDateTime().atZone(localZone).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime());
     }
 }
