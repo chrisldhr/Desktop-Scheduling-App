@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -22,6 +23,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.ResourceBundle;
 
 public class ModifyAppointmentFormController implements Initializable {
@@ -38,6 +40,9 @@ public class ModifyAppointmentFormController implements Initializable {
     public ComboBox<Customer> CustomerCombo;
     public ComboBox<User> UserCombo;
 
+    public static ZoneId localZone = ZoneId.systemDefault();
+    public static LocalDate date;
+
     public void ToModifyButton(ActionEvent actionEvent) throws IOException {
         int appointmentID = Integer.parseInt(IDText.getText());
         String title = TitleText.getText();
@@ -50,21 +55,30 @@ public class ModifyAppointmentFormController implements Initializable {
         int userID = UserCombo.getValue().getUserID();
         int contactID = ContactCombo.getValue().getContactID();
 
-        LocalDate date = DatePicker.getValue();
+        date = DatePicker.getValue();
         LocalDateTime startDateTime = LocalDateTime.of(date, startTime);
         LocalDateTime endDateTime = LocalDateTime.of(date, endTime);
 
         Timestamp startTimestamp = Timestamp.valueOf(startDateTime);
         Timestamp endTimestamp = Timestamp.valueOf(endDateTime);
 
-        DBAppointments.modifyAppointment(appointmentID, title, description, location, type, startTimestamp, endTimestamp, customerID, userID, contactID);
+        if (checkBusiness(startDateTime) || checkBusiness(endDateTime)) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("OUTSIDE OF BUSINESS HOURS");
+            alert.setContentText("Business Hours: 8:00 a.m. to 10:00 p.m. EST, including weekends");
+            alert.showAndWait();
+        }
 
-        Parent root = FXMLLoader.load(getClass().getResource("../view/ScheduleForm.fxml"));
-        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setTitle("SCHEDULER");
-        stage.setScene(scene);
-        stage.show();
+        else {
+            DBAppointments.modifyAppointment(appointmentID, title, description, location, type, startTimestamp, endTimestamp, customerID, userID, contactID);
+
+            Parent root = FXMLLoader.load(getClass().getResource("../view/ScheduleForm.fxml"));
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setTitle("SCHEDULER");
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
     public void ToCancelButton(ActionEvent actionEvent) throws IOException {
@@ -133,5 +147,20 @@ public class ModifyAppointmentFormController implements Initializable {
                 break;
             }
         }
+    }
+
+    public static Boolean checkBusiness(LocalDateTime time) {
+        LocalDateTime startBusiness = convertToEST(LocalDateTime.of(date, LocalTime.of(8, 0)));
+        LocalDateTime endBusiness = convertToEST(LocalDateTime.of(date, LocalTime.of(22, 0)));
+
+        return time.isBefore(startBusiness) || time.isAfter(endBusiness);
+    }
+
+    public static Timestamp convertToLocal(Timestamp utc) {
+        return Timestamp.valueOf(utc.toLocalDateTime().atZone(ZoneId.of("UTC")).withZoneSameInstant(localZone).toLocalDateTime());
+    }
+
+    public static LocalDateTime convertToEST (LocalDateTime local) {
+        return local.atZone(localZone).withZoneSameInstant(ZoneId.of("America/New_York")).toLocalDateTime();
     }
 }
