@@ -44,8 +44,11 @@ public class AddAppointmentFormController implements Initializable {
 
     public static ZoneId localZone = ZoneId.systemDefault();
     public static LocalDate date;
-
-    //private static ObservableList allTimes = FXCollections.observableArrayList();
+    public static int customerID;
+    public static LocalDateTime startDateTime;
+    public static LocalDateTime endDateTime;
+    public static Timestamp startTimestamp;
+    public static Timestamp endTimestamp;
 
     public void ToAddButton(ActionEvent actionEvent) throws IOException {
         String title = TitleText.getText();
@@ -54,27 +57,28 @@ public class AddAppointmentFormController implements Initializable {
         String type = TypeText.getText();
         LocalTime startTime = StartCombo.getValue();
         LocalTime endTime = EndCombo.getValue();
-        int customerID = CustomerCombo.getValue().getCustomerID();
         int userID = UserCombo.getValue().getUserID();
         int contactID = ContactCombo.getValue().getContactID();
 
         date = DatePicker.getValue();
-        LocalDateTime startDateTime = LocalDateTime.of(date, startTime);
-        LocalDateTime endDateTime = LocalDateTime.of(date, endTime);
+        customerID = CustomerCombo.getValue().getCustomerID();
+        startDateTime = LocalDateTime.of(date, startTime);
+        endDateTime = LocalDateTime.of(date, endTime);
 
-        checkBusiness(startDateTime);
-        checkBusiness(endDateTime);
-
-        Timestamp startTimestamp = Timestamp.valueOf(startDateTime);
-        Timestamp endTimestamp = Timestamp.valueOf(endDateTime);
+        startTimestamp = Timestamp.valueOf(startDateTime);
+        endTimestamp = Timestamp.valueOf(endDateTime);
 
         if (checkBusiness(startDateTime) || checkBusiness(endDateTime)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("OUTSIDE OF BUSINESS HOURS");
             alert.setContentText("Business Hours: 8:00 a.m. to 10:00 p.m. EST, including weekends");
             alert.showAndWait();
+        } else if (DBAppointments.checkOverlap(customerID, startTimestamp, endTimestamp)) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("OVERLAPPING APPOINTMENTS");
+            alert.setContentText("This customer already has an appointment at the time");
+            alert.showAndWait();
         }
-
         else {
             DBAppointments.addAppointment(title, description, location, type, startTimestamp, endTimestamp, customerID, userID, contactID);
 
@@ -128,10 +132,6 @@ public class AddAppointmentFormController implements Initializable {
         LocalDateTime endBusiness = convertToEST(LocalDateTime.of(date, LocalTime.of(22, 0)));
 
         return time.isBefore(startBusiness) || time.isAfter(endBusiness);
-    }
-
-    public static Timestamp convertToLocal(Timestamp utc) {
-        return Timestamp.valueOf(utc.toLocalDateTime().atZone(ZoneId.of("UTC")).withZoneSameInstant(localZone).toLocalDateTime());
     }
 
     public static LocalDateTime convertToEST (LocalDateTime local) {

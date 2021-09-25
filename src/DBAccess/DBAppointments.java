@@ -6,10 +6,7 @@ import Model.Country;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
@@ -119,4 +116,31 @@ public class DBAppointments {
     public static Timestamp convertToUTC (Timestamp local) {
         return Timestamp.valueOf(local.toLocalDateTime().atZone(localZone).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime());
     }
+
+    public static Boolean checkOverlap(int customerID, Timestamp start, Timestamp end) {
+        try {
+            String sqlco = "SELECT * from appointments WHERE Customer_ID = ? AND ? BETWEEN start AND end OR ? < start AND ? > end";
+
+            PreparedStatement psco = JDBC.getConnection().prepareStatement(sqlco);
+
+            Timestamp StartUTC = convertToUTC(start);
+            Timestamp EndUTC = convertToUTC(end);
+
+            psco.setInt(1, customerID);
+            psco.setTimestamp(2, EndUTC);
+            psco.setTimestamp(3, StartUTC);
+            psco.setTimestamp(4, EndUTC);
+
+            ResultSet rs = psco.executeQuery();
+
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+
+
 }

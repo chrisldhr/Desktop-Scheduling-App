@@ -47,3 +47,18 @@ public void ToStartCombo(ActionEvent actionEvent) {
             selectedStart = selectedStart.plusHours(1);
         }
     }
+
+    public static Boolean checkOverlap(int customerID, LocalDateTime startDateTime, LocalDateTime endDateTime) {
+            ObservableList<Appointment> Appointments = DBAppointments.getAppointmentsByCustomer(customerID);
+
+            for (Appointment A : Appointments) {
+                if ((startDateTime.isAfter(A.getStart().toLocalDateTime()) &&
+                        startDateTime.isBefore(A.getEnd().toLocalDateTime())) ||
+                (endDateTime.isAfter(A.getStart().toLocalDateTime()) &&
+                        endDateTime.isBefore(A.getEnd().toLocalDateTime())) ||
+                        (startDateTime.isBefore(A.getStart().toLocalDateTime()) &&
+                        endDateTime.isAfter(A.getEnd().toLocalDateTime()))) {
+                    return true;
+                }
+            }
+            return false;

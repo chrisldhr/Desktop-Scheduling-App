@@ -42,6 +42,11 @@ public class ModifyAppointmentFormController implements Initializable {
 
     public static ZoneId localZone = ZoneId.systemDefault();
     public static LocalDate date;
+    public static int customerID;
+    public static LocalDateTime startDateTime;
+    public static LocalDateTime endDateTime;
+    public static Timestamp startTimestamp;
+    public static Timestamp endTimestamp;
 
     public void ToModifyButton(ActionEvent actionEvent) throws IOException {
         int appointmentID = Integer.parseInt(IDText.getText());
@@ -51,21 +56,28 @@ public class ModifyAppointmentFormController implements Initializable {
         String type = TypeText.getText();
         LocalTime startTime = StartCombo.getValue();
         LocalTime endTime = EndCombo.getValue();
-        int customerID = CustomerCombo.getValue().getCustomerID();
         int userID = UserCombo.getValue().getUserID();
         int contactID = ContactCombo.getValue().getContactID();
 
         date = DatePicker.getValue();
-        LocalDateTime startDateTime = LocalDateTime.of(date, startTime);
-        LocalDateTime endDateTime = LocalDateTime.of(date, endTime);
+        customerID = CustomerCombo.getValue().getCustomerID();
+        startDateTime = LocalDateTime.of(date, startTime);
+        endDateTime = LocalDateTime.of(date, endTime);
 
-        Timestamp startTimestamp = Timestamp.valueOf(startDateTime);
-        Timestamp endTimestamp = Timestamp.valueOf(endDateTime);
+        startTimestamp = Timestamp.valueOf(startDateTime);
+        endTimestamp = Timestamp.valueOf(endDateTime);
+
+        date = DatePicker.getValue();
 
         if (checkBusiness(startDateTime) || checkBusiness(endDateTime)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("OUTSIDE OF BUSINESS HOURS");
             alert.setContentText("Business Hours: 8:00 a.m. to 10:00 p.m. EST, including weekends");
+            alert.showAndWait();
+        } else if (DBAppointments.checkOverlap(customerID, startTimestamp, endTimestamp)) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("OVERLAPPING APPOINTMENTS");
+            alert.setContentText("This customer already has an appointment at the time");
             alert.showAndWait();
         }
 
