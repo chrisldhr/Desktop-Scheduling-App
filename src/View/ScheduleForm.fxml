@@ -44,6 +44,12 @@
             <Button layoutX="110.0" layoutY="240.0" mnemonicParsing="false" onAction="#ToModifyAppointment" text="MODIFY" />
             <Button layoutX="490.0" layoutY="240.0" mnemonicParsing="false" onAction="#ToDeleteAppointment" text="DELETE" />
             <Label fx:id="RemoveAppointmentLabel" layoutX="246.0" layoutY="244.0" />
+            <RadioButton layoutX="150.0" layoutY="14.0" mnemonicParsing="false" onAction="#ToAllButton" selected="true" text="All">
+               <toggleGroup>
+                  <ToggleGroup fx:id="ApptButtons" />
+               </toggleGroup></RadioButton>
+            <RadioButton layoutX="246.0" layoutY="14.0" mnemonicParsing="false" onAction="#ToMonthButton" text="Month" toggleGroup="$ApptButtons" />
+            <RadioButton layoutX="343.0" layoutY="14.0" mnemonicParsing="false" onAction="#ToWeekButton" text="Week" toggleGroup="$ApptButtons" />
          </children>
       </AnchorPane>
       <Label fx:id="UpcomingAlert" layoutX="659.0" layoutY="14.0" text="No appointments in next 15 min" />

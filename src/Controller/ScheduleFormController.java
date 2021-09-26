@@ -167,4 +167,46 @@ public class ScheduleFormController implements Initializable {
         UserID.setCellValueFactory(new PropertyValueFactory<>("UserID"));
         ContactID.setCellValueFactory(new PropertyValueFactory<>("ContactID"));
     }
+
+    public void ToAllButton(ActionEvent actionEvent) {
+        AppointmentTable.setItems(DBAppointments.getAllAppointments());
+        AppointmentID.setCellValueFactory(new PropertyValueFactory<>("AppointmentID"));
+        Title.setCellValueFactory(new PropertyValueFactory<>("Title"));
+        Description.setCellValueFactory(new PropertyValueFactory<>("Description"));
+        Location.setCellValueFactory(new PropertyValueFactory<>("Location"));
+        Type.setCellValueFactory(new PropertyValueFactory<>("Type"));
+        Start.setCellValueFactory(new PropertyValueFactory<>("Start"));
+        End.setCellValueFactory(new PropertyValueFactory<>("End"));
+        ApptCustomerID.setCellValueFactory(new PropertyValueFactory<>("CustomerID"));
+        UserID.setCellValueFactory(new PropertyValueFactory<>("UserID"));
+        ContactID.setCellValueFactory(new PropertyValueFactory<>("ContactID"));
+    }
+
+    public void ToMonthButton(ActionEvent actionEvent) {
+        AppointmentTable.setItems(DBAppointments.getMonthAppointments());
+        AppointmentID.setCellValueFactory(new PropertyValueFactory<>("AppointmentID"));
+        Title.setCellValueFactory(new PropertyValueFactory<>("Title"));
+        Description.setCellValueFactory(new PropertyValueFactory<>("Description"));
+        Location.setCellValueFactory(new PropertyValueFactory<>("Location"));
+        Type.setCellValueFactory(new PropertyValueFactory<>("Type"));
+        Start.setCellValueFactory(new PropertyValueFactory<>("Start"));
+        End.setCellValueFactory(new PropertyValueFactory<>("End"));
+        ApptCustomerID.setCellValueFactory(new PropertyValueFactory<>("CustomerID"));
+        UserID.setCellValueFactory(new PropertyValueFactory<>("UserID"));
+        ContactID.setCellValueFactory(new PropertyValueFactory<>("ContactID"));
+    }
+
+    public void ToWeekButton(ActionEvent actionEvent) {
+        AppointmentTable.setItems(DBAppointments.getWeekAppointments());
+        AppointmentID.setCellValueFactory(new PropertyValueFactory<>("AppointmentID"));
+        Title.setCellValueFactory(new PropertyValueFactory<>("Title"));
+        Description.setCellValueFactory(new PropertyValueFactory<>("Description"));
+        Location.setCellValueFactory(new PropertyValueFactory<>("Location"));
+        Type.setCellValueFactory(new PropertyValueFactory<>("Type"));
+        Start.setCellValueFactory(new PropertyValueFactory<>("Start"));
+        End.setCellValueFactory(new PropertyValueFactory<>("End"));
+        ApptCustomerID.setCellValueFactory(new PropertyValueFactory<>("CustomerID"));
+        UserID.setCellValueFactory(new PropertyValueFactory<>("UserID"));
+        ContactID.setCellValueFactory(new PropertyValueFactory<>("ContactID"));
+    }
 }

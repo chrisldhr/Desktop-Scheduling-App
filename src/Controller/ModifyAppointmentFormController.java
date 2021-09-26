@@ -166,7 +166,8 @@ public class ModifyAppointmentFormController implements Initializable {
         LocalDateTime startBusiness = convertToEST(LocalDateTime.of(date, LocalTime.of(8, 0)));
         LocalDateTime endBusiness = convertToEST(LocalDateTime.of(date, LocalTime.of(22, 0)));
 
-        return time.isBefore(startBusiness) || time.isAfter(endBusiness);
+        LocalDateTime checkTime = convertToEST(time);
+        return checkTime.isBefore(startBusiness) || checkTime.isAfter(endBusiness);
     }
 
     public static Timestamp convertToLocal(Timestamp utc) {

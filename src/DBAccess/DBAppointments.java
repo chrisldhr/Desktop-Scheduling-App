@@ -7,7 +7,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 
 public class DBAppointments {
@@ -121,8 +123,8 @@ public class DBAppointments {
         try {
             String sqlco = "SELECT * from appointments WHERE Customer_ID = ? " +
                     "AND (? >= start AND ? < end)" +
-                    "AND (? BETWEEN start AND end)" +
-                    "OR (? < start AND ? > end)" +
+                    "OR (? BETWEEN start AND end)" +
+                    "OR (? <= start AND ? >= end)" +
                     "AND (Appointment_ID != ?) ";
 
             PreparedStatement psco = JDBC.getConnection().prepareStatement(sqlco);
@@ -130,13 +132,13 @@ public class DBAppointments {
             Timestamp StartUTC = convertToUTC(start);
             Timestamp EndUTC = convertToUTC(end);
 
-            psco.setInt(1, appointmentID);
+            psco.setInt(1, customerID);
             psco.setTimestamp(2, StartUTC);
             psco.setTimestamp(3, StartUTC);
             psco.setTimestamp(4, EndUTC);
             psco.setTimestamp(5, StartUTC);
             psco.setTimestamp(6, EndUTC);
-            psco.setInt(7, customerID);
+            psco.setInt(7, appointmentID);
 
             ResultSet rs = psco.executeQuery();
 
@@ -150,4 +152,97 @@ public class DBAppointments {
     }
 
 
+    public static ObservableList<Appointment> getMonthAppointments() {
+        LocalTime nowTime = LocalTime.now();
+        LocalDate nowDate = LocalDate.now();
+        LocalDate nowDatePlusAMonth = nowDate.plusMonths(1);
+        Timestamp now = Timestamp.valueOf(LocalDateTime.of(nowDate, nowTime));
+        Timestamp nowPlusAMonth = Timestamp.valueOf(LocalDateTime.of(nowDatePlusAMonth, nowTime));
+
+        ObservableList<Appointment> appointments = FXCollections.observableArrayList();
+
+        try {
+            String sql = "SELECT * from appointments WHERE start >= ? AND end <= ?";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+
+            Timestamp nowUTC = convertToUTC(now);
+            Timestamp monthUTC = convertToUTC(nowPlusAMonth);
+
+            ps.setTimestamp(1, nowUTC);
+            ps.setTimestamp(2, monthUTC);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int AppointmentID = rs.getInt("Appointment_ID");
+                String Title = rs.getString("Title");
+                String Description = rs.getString("Description");
+                String Location = rs.getString("Location");
+                String Type = rs.getString("Type");
+                Timestamp StartUTC = rs.getTimestamp("Start");
+                Timestamp EndUTC = rs.getTimestamp("End");
+                int CustomerID = rs.getInt("Customer_ID");
+                int UserID = rs.getInt("User_ID");
+                int ContactID = rs.getInt("Contact_ID");
+
+                Timestamp StartLocal = convertToLocal(StartUTC);
+                Timestamp EndLocal = convertToLocal(EndUTC);
+
+                Appointment A = new Appointment(AppointmentID, Title, Description, Location, Type, StartLocal, EndLocal, CustomerID, UserID, ContactID);
+                appointments.add(A);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return appointments;
+
+    }
+
+    public static ObservableList<Appointment> getWeekAppointments() {
+        LocalTime nowTime = LocalTime.now();
+        LocalDate nowDate = LocalDate.now();
+        LocalDate nowDatePlusAWeek = nowDate.plusWeeks(1);
+        Timestamp now = Timestamp.valueOf(LocalDateTime.of(nowDate, nowTime));
+        Timestamp nowPlusAWeek = Timestamp.valueOf(LocalDateTime.of(nowDatePlusAWeek, nowTime));
+
+        ObservableList<Appointment> appointments = FXCollections.observableArrayList();
+
+        try {
+            String sql = "SELECT * from appointments WHERE start >= ? AND end <= ?";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+
+            Timestamp nowUTC = convertToUTC(now);
+            Timestamp weekUTC = convertToUTC(nowPlusAWeek);
+
+            ps.setTimestamp(1, nowUTC);
+            ps.setTimestamp(2, weekUTC);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int AppointmentID = rs.getInt("Appointment_ID");
+                String Title = rs.getString("Title");
+                String Description = rs.getString("Description");
+                String Location = rs.getString("Location");
+                String Type = rs.getString("Type");
+                Timestamp StartUTC = rs.getTimestamp("Start");
+                Timestamp EndUTC = rs.getTimestamp("End");
+                int CustomerID = rs.getInt("Customer_ID");
+                int UserID = rs.getInt("User_ID");
+                int ContactID = rs.getInt("Contact_ID");
+
+                Timestamp StartLocal = convertToLocal(StartUTC);
+                Timestamp EndLocal = convertToLocal(EndUTC);
+
+                Appointment A = new Appointment(AppointmentID, Title, Description, Location, Type, StartLocal, EndLocal, CustomerID, UserID, ContactID);
+                appointments.add(A);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return appointments;
+
+    }
 }
