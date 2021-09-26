@@ -122,9 +122,9 @@ public class DBAppointments {
     public static Boolean checkOverlap(int customerID, Timestamp start, Timestamp end, int appointmentID) {
         try {
             String sqlco = "SELECT * from appointments WHERE Customer_ID = ? " +
-                    "AND (? >= start AND ? < end)" +
+                    "AND ((? >= start AND ? < end)" +
                     "OR (? BETWEEN start AND end)" +
-                    "OR (? <= start AND ? >= end)" +
+                    "OR (? <= start AND ? >= end))" +
                     "AND (Appointment_ID != ?) ";
 
             PreparedStatement psco = JDBC.getConnection().prepareStatement(sqlco);
