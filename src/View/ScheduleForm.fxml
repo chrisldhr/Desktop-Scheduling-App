@@ -53,7 +53,7 @@
          </children>
       </AnchorPane>
       <Label fx:id="UpcomingAlert" layoutX="659.0" layoutY="14.0" text="No appointments in next 15 min" />
-      <Button layoutX="765.0" layoutY="51.0" mnemonicParsing="false" text="REPORTS" />
+      <Button layoutX="765.0" layoutY="51.0" mnemonicParsing="false" onAction="#ToReportsButton" text="REPORTS" />
       <Button layoutX="786.0" layoutY="492.0" mnemonicParsing="false" onAction="#ToExitButton" text="EXIT" />
    </children>
 </AnchorPane>

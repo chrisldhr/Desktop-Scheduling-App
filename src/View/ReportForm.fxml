@@ -3,14 +3,41 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="480.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ReportFormController">
    <children>
-      <Button layoutX="34.0" layoutY="25.0" mnemonicParsing="false" text="Report 1" />
-      <Button layoutX="34.0" layoutY="82.0" mnemonicParsing="false" text="Report 2" />
-      <Button layoutX="34.0" layoutY="145.0" mnemonicParsing="false" text="Report 3" />
-      <Label layoutX="122.0" layoutY="29.0" text="Total number of customer appointments by type and month" />
-      <Label layoutX="122.0" layoutY="86.0" text="Schedule for each contact in your organization" />
-      <Label layoutX="122.0" layoutY="149.0" text="Schedule by description" />
+      <Label layoutX="14.0" layoutY="4.0" prefHeight="18.0" prefWidth="379.0" text="Report 1: Total number of customer appointments by type and month" />
+      <Label layoutX="14.0" layoutY="77.0" prefHeight="18.0" prefWidth="307.0" text="Report 2: Schedule for each contact in your organization" />
+      <Label layoutX="14.0" layoutY="261.0" prefHeight="18.0" prefWidth="289.0" text="Report 3: Customers by Division ID" />
+      <ComboBox layoutX="20.0" layoutY="32.0" prefWidth="150.0" promptText="MONTH" />
+      <ComboBox layoutX="185.0" layoutY="32.0" prefWidth="150.0" promptText="TYPE" />
+      <TextField layoutX="350.0" layoutY="32.0" promptText="TOTAL" />
+      <ComboBox layoutX="335.0" layoutY="74.0" prefWidth="150.0" promptText="CONTACT" />
+      <TableView layoutX="14.0" layoutY="113.0" prefHeight="136.0" prefWidth="662.0">
+         <columns>
+            <TableColumn fx:id="AppointmentID" prefWidth="38.00000190734863" text="ID" />
+            <TableColumn fx:id="Title" prefWidth="80.20001602172852" text="Title" />
+            <TableColumn fx:id="Description" prefWidth="87.39999389648438" text="Description" />
+            <TableColumn fx:id="Location" prefWidth="76.39997863769531" text="Location" />
+            <TableColumn fx:id="Type" prefWidth="69.60000610351562" text="Type" />
+            <TableColumn fx:id="Start" prefWidth="80.39999389648438" text="Start" />
+            <TableColumn fx:id="End" prefWidth="85.39996337890625" text="End" />
+            <TableColumn fx:id="ApptCustomerID" prefWidth="173.800048828125" text="CustomerID" />
+            <TableColumn fx:id="UserID" prefWidth="46.0" text="UserID" />
+            <TableColumn fx:id="ContactID" prefWidth="69.0" text="ContactID" />
+         </columns>
+      </TableView>
+      <ComboBox layoutX="335.0" layoutY="257.0" prefWidth="150.0" promptText="DIVISION ID" />
+      <TableView layoutX="14.0" layoutY="289.0" prefHeight="147.0" prefWidth="576.0">
+        <columns>
+           <TableColumn fx:id="CustomerID" prefWidth="32.40001106262207" text="ID" />
+           <TableColumn fx:id="Name" minWidth="0.0" prefWidth="128.60001373291016" text="Name" />
+           <TableColumn fx:id="Address" prefWidth="146.1999969482422" text="Address" />
+           <TableColumn fx:id="Postal" minWidth="0.0" prefWidth="41.600006103515625" text="Postal" />
+           <TableColumn fx:id="Phone" prefWidth="95.00003051757812" text="Phone" />
+           <TableColumn fx:id="DivisionID" prefWidth="101.0" text="DivisionID" />
+        </columns>
+      </TableView>
+      <Button layoutX="612.0" layoutY="410.0" mnemonicParsing="false" onAction="#ToScheduleForm" text="BACK" />
+
    </children>
 </AnchorPane>

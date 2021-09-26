@@ -209,4 +209,18 @@ public class ScheduleFormController implements Initializable {
         UserID.setCellValueFactory(new PropertyValueFactory<>("UserID"));
         ContactID.setCellValueFactory(new PropertyValueFactory<>("ContactID"));
     }
+
+    public void ToReportsButton(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("../view/ReportForm.fxml"));
+        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("REPORTS");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void check15() {
+
+    }
+
 }
