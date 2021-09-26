@@ -12,9 +12,8 @@
       <TextField fx:id="PasswordText" layoutX="169.0" layoutY="111.0" prefHeight="26.0" prefWidth="160.0" />
       <Button fx:id="Login" layoutX="169.0" layoutY="166.0" mnemonicParsing="false" onAction="#ToLoginButton" prefHeight="26.0" prefWidth="77.0" text="Login" />
       <Button fx:id="Cancel" layoutX="257.0" layoutY="166.0" mnemonicParsing="false" onAction="#ToCancelButton" prefHeight="26.0" prefWidth="69.0" text="Cancel" />
-      <Label fx:id="ErrorLabel" layoutX="101.0" layoutY="31.0" prefHeight="18.0" prefWidth="270.0" />
       <Label fx:id="TimeZone" layoutX="118.0" layoutY="211.0" prefHeight="18.0" prefWidth="149.0" text="Your time zone is: " />
-      <Label fx:id="LocationLabel" layoutX="123.0" layoutY="238.0" text="Unknown">
+      <Label fx:id="LocationLabel" layoutX="118.0" layoutY="239.0" prefHeight="18.0" prefWidth="150.0" text="Unknown">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
