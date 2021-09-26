@@ -6,16 +6,15 @@
 
 <AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginFormController">
    <children>
-      <Label layoutX="110.0" layoutY="14.0" text="Welcome David Couch and Friends!" />
-      <Label layoutX="96.0" layoutY="74.0" text="Username" />
-      <Label layoutX="96.0" layoutY="115.0" text="Password" />
-      <TextField fx:id="UsernameText" layoutX="169.0" layoutY="70.0" />
-      <TextField fx:id="PasswordText" layoutX="169.0" layoutY="111.0" />
-      <Button layoutX="169.0" layoutY="166.0" mnemonicParsing="false" onAction="#ToLoginButton" text="Login" />
-      <Button layoutX="266.0" layoutY="166.0" mnemonicParsing="false" onAction="#ToCancelButton" text="Cancel" />
-      <Label fx:id="ErrorLabel" layoutX="169.0" layoutY="248.0" prefHeight="18.0" prefWidth="142.0" text="Have a wonderful day!" />
-      <Label layoutX="169.0" layoutY="211.0" text="Your time zone is: " />
-      <Label fx:id="LocationLabel" layoutX="273.0" layoutY="211.0" text="Unknown">
+      <Label fx:id="Username" layoutX="54.0" layoutY="74.0" prefHeight="18.0" prefWidth="97.0" text="Username" />
+      <Label fx:id="Password" layoutX="52.0" layoutY="114.0" prefHeight="18.0" prefWidth="98.0" text="Password" />
+      <TextField fx:id="UsernameText" layoutX="169.0" layoutY="70.0" prefHeight="26.0" prefWidth="160.0" />
+      <TextField fx:id="PasswordText" layoutX="169.0" layoutY="111.0" prefHeight="26.0" prefWidth="160.0" />
+      <Button fx:id="Login" layoutX="169.0" layoutY="166.0" mnemonicParsing="false" onAction="#ToLoginButton" prefHeight="26.0" prefWidth="77.0" text="Login" />
+      <Button fx:id="Cancel" layoutX="257.0" layoutY="166.0" mnemonicParsing="false" onAction="#ToCancelButton" prefHeight="26.0" prefWidth="69.0" text="Cancel" />
+      <Label fx:id="ErrorLabel" layoutX="101.0" layoutY="31.0" prefHeight="18.0" prefWidth="270.0" />
+      <Label fx:id="TimeZone" layoutX="118.0" layoutY="211.0" prefHeight="18.0" prefWidth="149.0" text="Your time zone is: " />
+      <Label fx:id="LocationLabel" layoutX="123.0" layoutY="238.0" text="Unknown">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>

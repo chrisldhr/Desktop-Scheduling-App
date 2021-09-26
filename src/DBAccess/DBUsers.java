@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 public class DBUsers {
     public static ObservableList<User> getAllUsers () {
@@ -31,5 +32,26 @@ public class DBUsers {
             throwables.printStackTrace();
         }
         return users;
+    }
+
+
+    public static boolean checkLogin(String text, String text1) {
+        try {
+            String sqlcl = "SELECT * from users WHERE User_Name = ? AND Password = ?";
+
+            PreparedStatement pscl = JDBC.getConnection().prepareStatement(sqlcl);
+
+            pscl.setString(1, text);
+            pscl.setString(2, text1);
+
+            ResultSet rs = pscl.executeQuery();
+
+            if (rs.next()) {
+                return false;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return true;
     }
 }
