@@ -38,6 +38,7 @@
         </columns>
       </TableView>
       <Button layoutX="612.0" layoutY="410.0" mnemonicParsing="false" onAction="#ToScheduleForm" text="BACK" />
+      <Button layoutX="517.0" layoutY="32.0" mnemonicParsing="false" text="CALCULATE TOTAL" />
 
    </children>
 </AnchorPane>

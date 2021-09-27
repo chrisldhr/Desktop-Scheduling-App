@@ -18,6 +18,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -50,7 +51,7 @@ public class LoginFormController implements Initializable {
                 alert.showAndWait();
             } else {
                 loginAttempt("Successful");
-                Parent root = FXMLLoader.load(getClass().getResource("../view/ScheduleForm.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/View/ScheduleForm.fxml"));
                 Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                 Scene scene = new Scene(root);
                 stage.setTitle("SCHEDULER");
@@ -91,6 +92,5 @@ public class LoginFormController implements Initializable {
         outputFile.println("USER: " + UsernameText.getText() + " DATE/TIME: " + LocalDateTime.now() + " LOGIN: " + attempt);
         outputFile.close();
     }
-
 
 }

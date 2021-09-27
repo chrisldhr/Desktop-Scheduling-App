@@ -53,7 +53,7 @@
             <RadioButton layoutX="343.0" layoutY="14.0" mnemonicParsing="false" onAction="#ToWeekButton" text="Week" toggleGroup="$ApptButtons" />
          </children>
       </AnchorPane>
-      <Label fx:id="UpcomingAlert" layoutX="638.0" layoutY="34.0" prefHeight="68.0" prefWidth="148.0" text="No appointments in next 15 min" textFill="RED" wrapText="true">
+      <Label fx:id="UpcomingAlert" layoutX="638.0" layoutY="34.0" prefHeight="68.0" prefWidth="148.0" text="No appointments in next 15 min" wrapText="true">
          <font>
             <Font size="18.0" />
          </font></Label>

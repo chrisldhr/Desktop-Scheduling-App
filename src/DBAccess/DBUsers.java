@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 
 public class DBUsers {
+    private static User current;
+
     public static ObservableList<User> getAllUsers () {
         ObservableList<User> users = FXCollections.observableArrayList();
 
@@ -47,6 +49,10 @@ public class DBUsers {
             ResultSet rs = pscl.executeQuery();
 
             if (rs.next()) {
+                current = new User();
+                current.setUserName(rs.getString("User_Name"));
+                current.setUserID(rs.getInt("User_ID"));
+
                 return false;
             }
         } catch (SQLException throwables) {
@@ -54,4 +60,7 @@ public class DBUsers {
         }
         return true;
     }
+
+    public static User getCurrentUser() {return current;}
+
 }

@@ -9,6 +9,8 @@ public class User {
     private String UserPassword;
     private static ObservableList allUsers = FXCollections.observableArrayList();
 
+    public User () {}
+
     public User(int UserID, String UserName, String UserPassword) {
         this.UserID = UserID;
         this.UserName = UserName;

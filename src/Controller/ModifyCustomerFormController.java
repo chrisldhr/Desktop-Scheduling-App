@@ -40,7 +40,7 @@ public class ModifyCustomerFormController implements Initializable {
 
         DBCustomers.modifyCustomer(id, name,address, postal, phone, division);
 
-        Parent root = FXMLLoader.load(getClass().getResource("../view/ScheduleForm.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/View/ScheduleForm.fxml"));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("SCHEDULER");
@@ -49,7 +49,7 @@ public class ModifyCustomerFormController implements Initializable {
     }
 
     public void ToCancelButton(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("../view/ScheduleForm.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/View/ScheduleForm.fxml"));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("SCHEDULER");

@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static javafx.scene.paint.Color.RED;
+
 public class ScheduleFormController implements Initializable {
     private static Customer modifyingCustomer;
     private static Appointment modifyingAppointment;
@@ -43,6 +45,7 @@ public class ScheduleFormController implements Initializable {
     public TableColumn DivisionID;
     public Label RemoveCustomerLabel;
     public Label RemoveAppointmentLabel;
+    public Label UpcomingAlert;
 
     public static Customer getModifyingCustomer() {
         return modifyingCustomer;
@@ -51,6 +54,8 @@ public class ScheduleFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        check15();
+
         AppointmentTable.setItems(DBAppointments.getAllAppointments());
         AppointmentID.setCellValueFactory(new PropertyValueFactory<>("AppointmentID"));
         Title.setCellValueFactory(new PropertyValueFactory<>("Title"));
@@ -79,7 +84,7 @@ public class ScheduleFormController implements Initializable {
     }
 
     public void ToAddCustomer(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("../view/AddCustomerForm.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/View/AddCustomerForm.fxml"));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("ADD CUSTOMER FORM");
@@ -90,7 +95,7 @@ public class ScheduleFormController implements Initializable {
     public void ToModifyCustomer(ActionEvent actionEvent) throws IOException {
         modifyingCustomer = CustomerTable.getSelectionModel().getSelectedItem();
 
-        Parent root = FXMLLoader.load(getClass().getResource("../view/ModifyCustomerForm.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/View/ModifyCustomerForm.fxml"));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("MODIFY CUSTOMER FORM");
@@ -128,7 +133,7 @@ public class ScheduleFormController implements Initializable {
     }
 
     public void ToAddAppointment(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("../view/AddAppointmentForm.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/View/AddAppointmentForm.fxml"));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("ADD APPOINTMENT FORM");
@@ -139,7 +144,7 @@ public class ScheduleFormController implements Initializable {
     public void ToModifyAppointment(ActionEvent actionEvent) throws IOException {
         modifyingAppointment = AppointmentTable.getSelectionModel().getSelectedItem();
 
-        Parent root = FXMLLoader.load(getClass().getResource("../view/ModifyAppointmentForm.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/View/ModifyAppointmentForm.fxml"));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("MODIFY APPOINTMENT FORM");
@@ -211,7 +216,7 @@ public class ScheduleFormController implements Initializable {
     }
 
     public void ToReportsButton(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("../view/ReportForm.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/View/ReportForm.fxml"));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("REPORTS");
@@ -219,8 +224,11 @@ public class ScheduleFormController implements Initializable {
         stage.show();
     }
 
-    public static void check15() {
-
+    public void check15() {
+        if (DBAppointments.check15()){
+            UpcomingAlert.setText("Next Appointment in 15 min");
+            UpcomingAlert.setTextFill(RED);
+            UpcomingAlert.setWrapText(true);
+        }
     }
-
 }

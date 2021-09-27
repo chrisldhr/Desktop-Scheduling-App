@@ -85,7 +85,7 @@ public class ModifyAppointmentFormController implements Initializable {
         else {
             DBAppointments.modifyAppointment(appointmentID, title, description, location, type, startTimestamp, endTimestamp, customerID, userID, contactID);
 
-            Parent root = FXMLLoader.load(getClass().getResource("../view/ScheduleForm.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/View/ScheduleForm.fxml"));
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setTitle("SCHEDULER");
@@ -95,7 +95,7 @@ public class ModifyAppointmentFormController implements Initializable {
     }
 
     public void ToCancelButton(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("../view/ScheduleForm.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/View/ScheduleForm.fxml"));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("SCHEDULER");
@@ -170,9 +170,9 @@ public class ModifyAppointmentFormController implements Initializable {
         return checkTime.isBefore(startBusiness) || checkTime.isAfter(endBusiness);
     }
 
-    public static Timestamp convertToLocal(Timestamp utc) {
-        return Timestamp.valueOf(utc.toLocalDateTime().atZone(ZoneId.of("UTC")).withZoneSameInstant(localZone).toLocalDateTime());
-    }
+//    public static Timestamp convertToLocal(Timestamp utc) {
+//        return Timestamp.valueOf(utc.toLocalDateTime().atZone(ZoneId.of("UTC")).withZoneSameInstant(localZone).toLocalDateTime());
+//    }
 
     public static LocalDateTime convertToEST (LocalDateTime local) {
         return local.atZone(localZone).withZoneSameInstant(ZoneId.of("America/New_York")).toLocalDateTime();

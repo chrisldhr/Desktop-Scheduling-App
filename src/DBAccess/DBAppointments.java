@@ -1,5 +1,6 @@
 package DBAccess;
 
+import Controller.LoginFormController;
 import Helper.JDBC;
 import Model.Appointment;
 import Model.Country;
@@ -245,5 +246,30 @@ public class DBAppointments {
 
         return appointments;
 
+    }
+
+    public static boolean check15() {
+        try {
+            int userID = DBUsers.getCurrentUser().getUserID();
+            Timestamp now = Timestamp.valueOf(LocalDateTime.now());
+            Timestamp nowPlus15 = Timestamp.valueOf(LocalDateTime.now().plusMinutes(15));
+
+            String sqlco = "SELECT * from appointments WHERE User_ID = ? AND start BETWEEN ? AND ?" ;
+
+            PreparedStatement psco = JDBC.getConnection().prepareStatement(sqlco);
+
+            psco.setInt(1, userID);
+            psco.setTimestamp(2, now);
+            psco.setTimestamp(3, nowPlus15);
+
+            ResultSet rs = psco.executeQuery();
+
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
     }
 }
