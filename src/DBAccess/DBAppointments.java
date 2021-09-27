@@ -8,10 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
+import java.time.*;
 
 public class DBAppointments {
     public static ZoneId localZone = ZoneId.systemDefault();
@@ -157,6 +154,7 @@ public class DBAppointments {
     public static ObservableList<Appointment> getMonthAppointments() {
         LocalTime nowTime = LocalTime.now();
         LocalDate nowDate = LocalDate.now();
+        String current = String.valueOf(LocalDateTime.now().getMonth());
         LocalDate nowDatePlusAMonth = nowDate.plusMonths(1);
         Timestamp now = Timestamp.valueOf(LocalDateTime.of(nowDate, nowTime));
         Timestamp nowPlusAMonth = Timestamp.valueOf(LocalDateTime.of(nowDatePlusAMonth, nowTime));
@@ -164,14 +162,15 @@ public class DBAppointments {
         ObservableList<Appointment> appointments = FXCollections.observableArrayList();
 
         try {
-            String sql = "SELECT * from appointments WHERE start >= ? AND end <= ?";
+            String sql = "SELECT * from appointments WHERE MONTHNAME(start) = ?";
+                    //"start >= ? AND end <= ?";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
 
 //            Timestamp nowUTC = convertToUTC(now);
 //            Timestamp monthUTC = convertToUTC(nowPlusAMonth);
 
-            ps.setTimestamp(1, now);
-            ps.setTimestamp(2, nowPlusAMonth);
+            ps.setString(1, current);
+//            ps.setTimestamp(2, nowPlusAMonth);
 
             ResultSet rs = ps.executeQuery();
 
