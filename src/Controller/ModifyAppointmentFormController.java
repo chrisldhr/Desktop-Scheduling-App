@@ -50,47 +50,64 @@ public class ModifyAppointmentFormController implements Initializable {
     public static int appointmentID;
 
     public void ToModifyButton(ActionEvent actionEvent) throws IOException {
-        String title = TitleText.getText();
-        String description = DescriptionText.getText();
-        String location = LocationText.getText();
-        String type = TypeText.getText();
-        LocalTime startTime = StartCombo.getValue();
-        LocalTime endTime = EndCombo.getValue();
-        int userID = UserCombo.getValue().getUserID();
-        int contactID = ContactCombo.getValue().getContactID();
+        try {
+            String title = TitleText.getText();
+            String description = DescriptionText.getText();
+            String location = LocationText.getText();
+            String type = TypeText.getText();
+            LocalTime startTime = StartCombo.getValue();
+            LocalTime endTime = EndCombo.getValue();
+            int userID = UserCombo.getValue().getUserID();
+            int contactID = ContactCombo.getValue().getContactID();
 
-        appointmentID = Integer.parseInt(IDText.getText());
-        date = DatePicker.getValue();
-        customerID = CustomerCombo.getValue().getCustomerID();
-        startDateTime = LocalDateTime.of(date, startTime);
-        endDateTime = LocalDateTime.of(date, endTime);
+            appointmentID = Integer.parseInt(IDText.getText());
+            date = DatePicker.getValue();
+            customerID = CustomerCombo.getValue().getCustomerID();
+            startDateTime = LocalDateTime.of(date, startTime);
+            endDateTime = LocalDateTime.of(date, endTime);
 
-        startTimestamp = Timestamp.valueOf(startDateTime);
-        endTimestamp = Timestamp.valueOf(endDateTime);
+            startTimestamp = Timestamp.valueOf(startDateTime);
+            endTimestamp = Timestamp.valueOf(endDateTime);
 
-        date = DatePicker.getValue();
+            date = DatePicker.getValue();
 
-        if (checkBusiness(startDateTime) || checkBusiness(endDateTime)) {
+            if (title.isEmpty() || description.isEmpty() || location.isEmpty() || type.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("EMPTY FIELDS");
+                alert.setContentText("Please fill in all the fields");
+                alert.showAndWait();
+            }
+            else if (startDateTime.isAfter(endDateTime) || startDateTime.isEqual(endDateTime)) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("INVALID TIMES");
+                alert.setContentText("Please choose an end time that is after the start time");
+                alert.showAndWait();
+            }
+            else if (checkBusiness(startDateTime) || checkBusiness(endDateTime)) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("OUTSIDE OF BUSINESS HOURS");
+                alert.setContentText("Business Hours: 8:00 a.m. to 10:00 p.m. EST, including weekends");
+                alert.showAndWait();
+            } else if (DBAppointments.checkOverlap(customerID, startTimestamp, endTimestamp, appointmentID)) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("OVERLAPPING APPOINTMENTS");
+                alert.setContentText("This customer already has an appointment at the time");
+                alert.showAndWait();
+            } else {
+                DBAppointments.modifyAppointment(appointmentID, title, description, location, type, startTimestamp, endTimestamp, customerID, userID, contactID);
+
+                Parent root = FXMLLoader.load(getClass().getResource("/View/ScheduleForm.fxml"));
+                Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setTitle("SCHEDULER");
+                stage.setScene(scene);
+                stage.show();
+            }
+        } catch (Exception e){
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("OUTSIDE OF BUSINESS HOURS");
-            alert.setContentText("Business Hours: 8:00 a.m. to 10:00 p.m. EST, including weekends");
+            alert.setTitle("EMPTY FIELDS");
+            alert.setContentText("Please fill in all the fields");
             alert.showAndWait();
-        } else if (DBAppointments.checkOverlap(customerID, startTimestamp, endTimestamp, appointmentID)) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("OVERLAPPING APPOINTMENTS");
-            alert.setContentText("This customer already has an appointment at the time");
-            alert.showAndWait();
-        }
-
-        else {
-            DBAppointments.modifyAppointment(appointmentID, title, description, location, type, startTimestamp, endTimestamp, customerID, userID, contactID);
-
-            Parent root = FXMLLoader.load(getClass().getResource("/View/ScheduleForm.fxml"));
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setTitle("SCHEDULER");
-            stage.setScene(scene);
-            stage.show();
         }
     }
 

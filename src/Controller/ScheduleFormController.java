@@ -118,6 +118,7 @@ public class ScheduleFormController implements Initializable {
         DivisionID.setCellValueFactory(new PropertyValueFactory<>("DivisionID"));
 
         RemoveCustomerLabel.setText("Customer Removed");
+        RemoveCustomerLabel.setTextFill(RED);
 
         AppointmentTable.setItems(DBAppointments.getAllAppointments());
         AppointmentID.setCellValueFactory(new PropertyValueFactory<>("AppointmentID"));
@@ -159,6 +160,7 @@ public class ScheduleFormController implements Initializable {
 
         DBAppointments.deleteAppointment(appointmentID);
         RemoveAppointmentLabel.setText("Appointment #" + appointmentID + " [" + appointmentType +  "] Was Removed");
+        RemoveAppointmentLabel.setTextFill(RED);
 
         AppointmentTable.setItems(DBAppointments.getAllAppointments());
         AppointmentID.setCellValueFactory(new PropertyValueFactory<>("AppointmentID"));

@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -29,20 +30,35 @@ public class AddCustomerFormController implements Initializable {
     public ComboBox<Division> DivisionCombo;
 
     public void ToAddButton(ActionEvent actionEvent) throws IOException {
-        String name = NameText.getText();
-        String address = AddressText.getText();
-        String postal = PostalText.getText();
-        String phone = PhoneText.getText();
-        int division = DivisionCombo.getValue().getDivisionID();
+        try {
+            String name = NameText.getText();
+            String address = AddressText.getText();
+            String postal = PostalText.getText();
+            String phone = PhoneText.getText();
+            int division = DivisionCombo.getValue().getDivisionID();
 
-        DBCustomers.addCustomer(name,address, postal, phone, division);
+            if (name.isEmpty() || address.isEmpty() || postal.isEmpty() || phone.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("EMPTY FIELDS");
+                alert.setContentText("Please fill in all the fields");
+                alert.showAndWait();
+            }
+            else {
+                DBCustomers.addCustomer(name, address, postal, phone, division);
 
-        Parent root = FXMLLoader.load(getClass().getResource("/View/ScheduleForm.fxml"));
-        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setTitle("SCHEDULER");
-        stage.setScene(scene);
-        stage.show();
+                Parent root = FXMLLoader.load(getClass().getResource("/View/ScheduleForm.fxml"));
+                Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setTitle("SCHEDULER");
+                stage.setScene(scene);
+                stage.show();
+            }
+        } catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("EMPTY FIELDS");
+            alert.setContentText("Please fill in all the fields");
+            alert.showAndWait();
+        }
     }
 
     public void ToCancelButton(ActionEvent actionEvent) throws IOException {
