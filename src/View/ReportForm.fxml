@@ -11,23 +11,23 @@
       <ComboBox fx:id="MonthCombo" layoutX="20.0" layoutY="32.0" prefWidth="150.0" promptText="MONTH" />
       <ComboBox fx:id="TypeCombo" layoutX="185.0" layoutY="32.0" prefWidth="150.0" promptText="TYPE" />
       <TextField fx:id="TotalText" layoutX="350.0" layoutY="32.0" promptText="TOTAL" />
-      <ComboBox layoutX="335.0" layoutY="74.0" onAction="#ToContactCombo" prefWidth="150.0" promptText="CONTACT" />
-      <TableView layoutX="14.0" layoutY="113.0" prefHeight="136.0" prefWidth="662.0">
+      <ComboBox fx:id="ContactCombo" layoutX="335.0" layoutY="74.0" onAction="#ToContactCombo" prefWidth="150.0" promptText="CONTACT" />
+      <TableView fx:id="AppointmentTable" layoutX="14.0" layoutY="113.0" prefHeight="136.0" prefWidth="662.0">
          <columns>
             <TableColumn fx:id="AppointmentID" prefWidth="38.00000190734863" text="ID" />
             <TableColumn fx:id="Title" prefWidth="80.20001602172852" text="Title" />
             <TableColumn fx:id="Description" prefWidth="87.39999389648438" text="Description" />
             <TableColumn fx:id="Location" prefWidth="76.39997863769531" text="Location" />
-            <TableColumn fx:id="Type" prefWidth="69.60000610351562" text="Type" />
-            <TableColumn fx:id="Start" prefWidth="80.39999389648438" text="Start" />
-            <TableColumn fx:id="End" prefWidth="85.39996337890625" text="End" />
-            <TableColumn fx:id="ApptCustomerID" prefWidth="173.800048828125" text="CustomerID" />
-            <TableColumn fx:id="UserID" prefWidth="46.0" text="UserID" />
-            <TableColumn fx:id="ContactID" prefWidth="69.0" text="ContactID" />
+            <TableColumn fx:id="Type" prefWidth="43.399993896484375" text="Type" />
+            <TableColumn fx:id="Start" prefWidth="110.0" text="Start" />
+            <TableColumn fx:id="End" prefWidth="101.20001220703125" text="End" />
+            <TableColumn fx:id="ApptCustomerID" prefWidth="73.20001220703125" text="CustomerID" />
+            <TableColumn fx:id="UserID" prefWidth="49.79998779296875" text="UserID" />
+            <TableColumn fx:id="ContactID" minWidth="1.4000244140625" prefWidth="2.4000244140625" text="ContactID" />
          </columns>
       </TableView>
-      <ComboBox layoutX="335.0" layoutY="257.0" onAction="#ToDivisionIDCombo" prefWidth="150.0" promptText="DIVISION ID" />
-      <TableView layoutX="14.0" layoutY="289.0" prefHeight="147.0" prefWidth="576.0">
+      <ComboBox fx:id="DivisionIDCombo" layoutX="335.0" layoutY="257.0" onAction="#ToDivisionIDCombo" prefWidth="150.0" promptText="DIVISION ID" />
+      <TableView fx:id="CustomerTable" layoutX="14.0" layoutY="289.0" prefHeight="147.0" prefWidth="576.0">
         <columns>
            <TableColumn fx:id="CustomerID" prefWidth="32.40001106262207" text="ID" />
            <TableColumn fx:id="Name" minWidth="0.0" prefWidth="128.60001373291016" text="Name" />

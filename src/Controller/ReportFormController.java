@@ -1,6 +1,11 @@
 package Controller;
 
 import DBAccess.DBAppointments;
+import DBAccess.DBContacts;
+import DBAccess.DBCustomers;
+import DBAccess.DBDivisions;
+import Model.Contact;
+import Model.Division;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,7 +16,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -39,12 +46,23 @@ public class ReportFormController implements Initializable {
     public TableColumn Phone;
     public TableColumn DivisionID;
     public ObservableList<String> months;
+    public ComboBox<Contact> ContactCombo;
+    public ComboBox<Division> DivisionIDCombo;
+    public TableView AppointmentTable;
+    public TableView CustomerTable;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         months = FXCollections.observableArrayList("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
         MonthCombo.setItems(months);
         TypeCombo.setItems(DBAppointments.getAllTypes());
+        ContactCombo.setItems(DBContacts.getAllContacts());
+        DivisionIDCombo.setItems(DBDivisions.getAllDivisions());
+
+        MonthCombo.setVisibleRowCount(5);
+        TypeCombo.setVisibleRowCount(5);
+        ContactCombo.setVisibleRowCount(5);
+        DivisionIDCombo.setVisibleRowCount(5);
     }
 
     public void ToScheduleForm(ActionEvent actionEvent) throws IOException {
@@ -65,9 +83,29 @@ public class ReportFormController implements Initializable {
     }
 
     public void ToContactCombo(ActionEvent actionEvent) {
+        int contactID = ContactCombo.getValue().getContactID();
+        AppointmentTable.setItems(DBAppointments.getContactAppts(contactID));
+        AppointmentID.setCellValueFactory(new PropertyValueFactory<>("AppointmentID"));
+        Title.setCellValueFactory(new PropertyValueFactory<>("Title"));
+        Description.setCellValueFactory(new PropertyValueFactory<>("Description"));
+        Location.setCellValueFactory(new PropertyValueFactory<>("Location"));
+        Type.setCellValueFactory(new PropertyValueFactory<>("Type"));
+        Start.setCellValueFactory(new PropertyValueFactory<>("Start"));
+        End.setCellValueFactory(new PropertyValueFactory<>("End"));
+        ApptCustomerID.setCellValueFactory(new PropertyValueFactory<>("CustomerID"));
+        UserID.setCellValueFactory(new PropertyValueFactory<>("UserID"));
+        ContactID.setCellValueFactory(new PropertyValueFactory<>("ContactID"));
     }
 
     public void ToDivisionIDCombo(ActionEvent actionEvent) {
+        int divisionID = DivisionIDCombo.getValue().getDivisionID();
+        CustomerTable.setItems(DBCustomers.getCustomersByDivision(divisionID));
+        CustomerID.setCellValueFactory(new PropertyValueFactory<>("CustomerID"));
+        Name.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        Address.setCellValueFactory(new PropertyValueFactory<>("Address"));
+        Postal.setCellValueFactory(new PropertyValueFactory<>("Postal"));
+        Phone.setCellValueFactory(new PropertyValueFactory<>("Phone"));
+        DivisionID.setCellValueFactory(new PropertyValueFactory<>("DivisionID"));
     }
 
 

@@ -324,4 +324,37 @@ public class DBAppointments {
 
         return appointments.size();
     }
+
+    public static ObservableList getContactAppts(int contactID) {
+        ObservableList<Appointment> appointments = FXCollections.observableArrayList();
+
+        try {
+            String sql = "SELECT * from appointments WHERE Contact_ID = ?";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+
+            ps.setInt(1, contactID);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int AppointmentID = rs.getInt("Appointment_ID");
+                String Title = rs.getString("Title");
+                String Description = rs.getString("Description");
+                String Location = rs.getString("Location");
+                String Type = rs.getString("Type");
+                Timestamp StartUTC = rs.getTimestamp("Start");
+                Timestamp EndUTC = rs.getTimestamp("End");
+                int CustomerID = rs.getInt("Customer_ID");
+                int UserID = rs.getInt("User_ID");
+                int ContactID = rs.getInt("Contact_ID");
+
+                Appointment A = new Appointment(AppointmentID, Title, Description, Location, Type, StartUTC, EndUTC, CustomerID, UserID, ContactID);
+                appointments.add(A);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return appointments;
+
+    }
 }
