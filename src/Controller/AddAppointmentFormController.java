@@ -82,7 +82,7 @@ public class AddAppointmentFormController implements Initializable {
         else {
             DBAppointments.addAppointment(title, description, location, type, startTimestamp, endTimestamp, customerID, userID, contactID);
 
-            Parent root = FXMLLoader.load(getClass().getResource("../view/ScheduleForm.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/View/ScheduleForm.fxml"));
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setTitle("SCHEDULER");
@@ -92,7 +92,7 @@ public class AddAppointmentFormController implements Initializable {
     }
 
     public void ToCancelButton(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("../view/ScheduleForm.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/View/ScheduleForm.fxml"));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("SCHEDULER");

@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="550.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ScheduleFormController">
    <children>
@@ -52,8 +53,11 @@
             <RadioButton layoutX="343.0" layoutY="14.0" mnemonicParsing="false" onAction="#ToWeekButton" text="Week" toggleGroup="$ApptButtons" />
          </children>
       </AnchorPane>
-      <Label fx:id="UpcomingAlert" layoutX="659.0" layoutY="14.0" text="No appointments in next 15 min" />
-      <Button layoutX="765.0" layoutY="51.0" mnemonicParsing="false" onAction="#ToReportsButton" text="REPORTS" />
+      <Label fx:id="UpcomingAlert" layoutX="638.0" layoutY="34.0" prefHeight="68.0" prefWidth="148.0" text="No appointments in next 15 min" textFill="RED" wrapText="true">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Button layoutX="672.0" layoutY="122.0" mnemonicParsing="false" onAction="#ToReportsButton" text="REPORTS" />
       <Button layoutX="786.0" layoutY="492.0" mnemonicParsing="false" onAction="#ToExitButton" text="EXIT" />
    </children>
 </AnchorPane>

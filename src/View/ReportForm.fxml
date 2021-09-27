@@ -5,7 +5,7 @@
 
 <AnchorPane prefHeight="480.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ReportFormController">
    <children>
-      <Label layoutX="14.0" layoutY="4.0" prefHeight="18.0" prefWidth="379.0" text="Report 1: Total number of customer appointments by type and month" />
+      <Label layoutX="14.0" layoutY="4.0" prefHeight="18.0" prefWidth="379.0" text="Report 1: Total number of customer appointments by month and type" />
       <Label layoutX="14.0" layoutY="77.0" prefHeight="18.0" prefWidth="307.0" text="Report 2: Schedule for each contact in your organization" />
       <Label layoutX="14.0" layoutY="261.0" prefHeight="18.0" prefWidth="289.0" text="Report 3: Customers by Division ID" />
       <ComboBox layoutX="20.0" layoutY="32.0" prefWidth="150.0" promptText="MONTH" />
