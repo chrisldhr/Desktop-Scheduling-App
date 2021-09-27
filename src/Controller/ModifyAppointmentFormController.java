@@ -132,14 +132,14 @@ public class ModifyAppointmentFormController implements Initializable {
         CustomerCombo.setVisibleRowCount(5);
         UserCombo.setVisibleRowCount(5);
 
-        LocalTime start = LocalTime.of(8, 0);
-        LocalTime end = LocalTime.of(22,0);
+        LocalTime start = LocalTime.of(0,0);
+        LocalTime end = LocalTime.of(23,30);
 
-        while(start.isBefore(end)) {
+        do {
             StartCombo.getItems().add(start);
-            EndCombo.getItems().add(start.plusHours(1));
+            EndCombo.getItems().add(start);
             start = start.plusHours(1);
-        }
+        } while(start.minusMinutes(1).isBefore(end));
 
         DatePicker.setValue(Selected.getStart().toLocalDateTime().toLocalDate());
         StartCombo.getSelectionModel().select(Selected.getStart().toLocalDateTime().toLocalTime());
