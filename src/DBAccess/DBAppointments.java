@@ -272,4 +272,56 @@ public class DBAppointments {
         }
         return false;
     }
+
+    public static ObservableList<String> getAllTypes () {
+        ObservableList<String> types = FXCollections.observableArrayList();
+
+        try {
+            String sql = "SELECT DISTINCT type from appointments";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String type = rs.getString("Type");
+                types.add(type);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return types;
+    }
+
+    public static int getTotalAppts(String month, String type) {
+        ObservableList<Appointment> appointments = FXCollections.observableArrayList();
+
+        try {
+            String sql = "SELECT * from appointments WHERE MONTHNAME(Start) = ? AND type = ?";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+
+            ps.setString(1, month);
+            ps.setString(2, type);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int AppointmentID = rs.getInt("Appointment_ID");
+                String Title = rs.getString("Title");
+                String Description = rs.getString("Description");
+                String Location = rs.getString("Location");
+                String Type = rs.getString("Type");
+                Timestamp StartUTC = rs.getTimestamp("Start");
+                Timestamp EndUTC = rs.getTimestamp("End");
+                int CustomerID = rs.getInt("Customer_ID");
+                int UserID = rs.getInt("User_ID");
+                int ContactID = rs.getInt("Contact_ID");
+
+                Appointment A = new Appointment(AppointmentID, Title, Description, Location, Type, StartUTC, EndUTC, CustomerID, UserID, ContactID);
+                appointments.add(A);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return appointments.size();
+    }
 }

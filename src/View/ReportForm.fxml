@@ -8,10 +8,10 @@
       <Label layoutX="14.0" layoutY="4.0" prefHeight="18.0" prefWidth="379.0" text="Report 1: Total number of customer appointments by month and type" />
       <Label layoutX="14.0" layoutY="77.0" prefHeight="18.0" prefWidth="307.0" text="Report 2: Schedule for each contact in your organization" />
       <Label layoutX="14.0" layoutY="261.0" prefHeight="18.0" prefWidth="289.0" text="Report 3: Customers by Division ID" />
-      <ComboBox layoutX="20.0" layoutY="32.0" prefWidth="150.0" promptText="MONTH" />
-      <ComboBox layoutX="185.0" layoutY="32.0" prefWidth="150.0" promptText="TYPE" />
-      <TextField layoutX="350.0" layoutY="32.0" promptText="TOTAL" />
-      <ComboBox layoutX="335.0" layoutY="74.0" prefWidth="150.0" promptText="CONTACT" />
+      <ComboBox fx:id="MonthCombo" layoutX="20.0" layoutY="32.0" prefWidth="150.0" promptText="MONTH" />
+      <ComboBox fx:id="TypeCombo" layoutX="185.0" layoutY="32.0" prefWidth="150.0" promptText="TYPE" />
+      <TextField fx:id="TotalText" layoutX="350.0" layoutY="32.0" promptText="TOTAL" />
+      <ComboBox layoutX="335.0" layoutY="74.0" onAction="#ToContactCombo" prefWidth="150.0" promptText="CONTACT" />
       <TableView layoutX="14.0" layoutY="113.0" prefHeight="136.0" prefWidth="662.0">
          <columns>
             <TableColumn fx:id="AppointmentID" prefWidth="38.00000190734863" text="ID" />
@@ -26,7 +26,7 @@
             <TableColumn fx:id="ContactID" prefWidth="69.0" text="ContactID" />
          </columns>
       </TableView>
-      <ComboBox layoutX="335.0" layoutY="257.0" prefWidth="150.0" promptText="DIVISION ID" />
+      <ComboBox layoutX="335.0" layoutY="257.0" onAction="#ToDivisionIDCombo" prefWidth="150.0" promptText="DIVISION ID" />
       <TableView layoutX="14.0" layoutY="289.0" prefHeight="147.0" prefWidth="576.0">
         <columns>
            <TableColumn fx:id="CustomerID" prefWidth="32.40001106262207" text="ID" />
@@ -38,7 +38,7 @@
         </columns>
       </TableView>
       <Button layoutX="612.0" layoutY="410.0" mnemonicParsing="false" onAction="#ToScheduleForm" text="BACK" />
-      <Button layoutX="517.0" layoutY="32.0" mnemonicParsing="false" text="CALCULATE TOTAL" />
+      <Button layoutX="517.0" layoutY="32.0" mnemonicParsing="false" onAction="#ToRunButton" text="RUN" />
 
    </children>
 </AnchorPane>
