@@ -146,14 +146,18 @@ public class AddAppointmentFormController implements Initializable {
     }
 
     public static Boolean checkBusiness(LocalDateTime time) {
-        LocalDateTime startBusiness = convertToEST(LocalDateTime.of(date, LocalTime.of(8, 0)));
-        LocalDateTime endBusiness = convertToEST(LocalDateTime.of(date, LocalTime.of(22, 0)));
+        LocalDateTime startBusiness = convertToLocal(LocalDateTime.of(date, LocalTime.of(8, 0)));
+        LocalDateTime endBusiness = convertToLocal(LocalDateTime.of(date, LocalTime.of(22, 0)));
 
-        LocalDateTime checkTime = convertToEST(time);
-        return checkTime.isBefore(startBusiness) || checkTime.isAfter(endBusiness);
+        //LocalDateTime checkTime = convertToLocal(time);
+        return time.isBefore(startBusiness) || time.isAfter(endBusiness);
     }
 
     public static LocalDateTime convertToEST (LocalDateTime local) {
         return local.atZone(localZone).withZoneSameInstant(ZoneId.of("America/New_York")).toLocalDateTime();
+    }
+
+    public static LocalDateTime convertToLocal (LocalDateTime est) {
+        return est.atZone(ZoneId.of("America/New_York")).withZoneSameInstant(localZone).toLocalDateTime();
     }
 }
