@@ -20,72 +20,8 @@ Directions:
 "--module-path ${PATH_TO_FX} --add-modules javafx.fxml,javafx.controls,javafx.graphics"
 - Then run src/Main/Main.java
 
-Description of additional report: Provides schedules based on description
+Description of additional report: Provides customers based on division ID
 
+Lambda expressions: In AddAppointmentFormController (bottom of code)
+and ModifyAppointmentFormController (bottom of code)
 
-//        LocalDateTime startBusiness = convertToLocal(LocalDateTime.of(date, LocalTime.of(8, 0)));
-
-//    public static LocalDateTime convertToLocal (LocalDateTime EST) {
-//        return EST.atZone(ZoneId.of("America/New_York")).withZoneSameInstant(localZone).toLocalDateTime();
-//    }
-
-    public static LocalDateTime convertToEST (LocalDateTime local) {
-        return local.atZone(localZone).withZoneSameInstant(ZoneId.of("America/New_York")).toLocalDateTime();
-    }
-
-//    public static Timestamp convertToLocal(Timestamp utc) {
-//        return Timestamp.valueOf(utc.toLocalDateTime().atZone(ZoneId.of("UTC")).withZoneSameInstant(localZone).toLocalDateTime());
-//    }
-
-    public static LocalDateTime convertToEST (LocalDateTime local) {
-        return local.atZone(localZone).withZoneSameInstant(ZoneId.of("America/New_York")).toLocalDateTime();
-    }
-
-    public static LocalDateTime convertToLocal (LocalDateTime est) {
-        return est.atZone(ZoneId.of("America/New_York")).withZoneSameInstant(localZone).toLocalDateTime();
-    }
-
-//            ResultSet rs = psac.getGeneratedKeys();
-//            rs.next();
-//            Statement statement = JDBC.getConnection().createStatement();
-//            String queryCustomer = "INSERT INTO customers SET Customer_Name='" + name + "', Address='" + address + "', Postal='" + postal + "', Phone='" + phone + "', Create_Date=NOW(), Script='script', Last_Update=NOW(), Last_Updated_By='script', Division_ID='" + division + "'";
-//            statement.executeUpdate(queryCustomer);
-
-public void ToStartCombo(ActionEvent actionEvent) {
-        LocalTime selectedStart = StartCombo.getValue();
-        LocalTime selectedEnd = LocalTime.of(22,0);
-
-        EndCombo.getItems().clear();
-
-        while(selectedStart.isBefore(selectedEnd)) {
-            EndCombo.getItems().add(selectedStart.plusHours(1));
-            selectedStart = selectedStart.plusHours(1);
-        }
-    }
-
-    public void ToEndCombo(ActionEvent actionEvent) {
-        LocalTime selectedStart = LocalTime.of(8,0);
-        LocalTime selectedEnd = StartCombo.getValue();
-
-        StartCombo.getItems().clear();
-
-        while(selectedStart.isBefore(selectedEnd)) {
-            StartCombo.getItems().add(selectedStart);
-            selectedStart = selectedStart.plusHours(1);
-        }
-    }
-
-    public static Boolean checkOverlap(int customerID, LocalDateTime startDateTime, LocalDateTime endDateTime) {
-            ObservableList<Appointment> Appointments = DBAppointments.getAppointmentsByCustomer(customerID);
-
-            for (Appointment A : Appointments) {
-                if ((startDateTime.isAfter(A.getStart().toLocalDateTime()) &&
-                        startDateTime.isBefore(A.getEnd().toLocalDateTime())) ||
-                (endDateTime.isAfter(A.getStart().toLocalDateTime()) &&
-                        endDateTime.isBefore(A.getEnd().toLocalDateTime())) ||
-                        (startDateTime.isBefore(A.getStart().toLocalDateTime()) &&
-                        endDateTime.isAfter(A.getEnd().toLocalDateTime()))) {
-                    return true;
-                }
-            }
-            return false;
