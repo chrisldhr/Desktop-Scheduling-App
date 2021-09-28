@@ -11,9 +11,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
+/**
+ * This is the user database class that contains methods for getting users and checking login
+ * */
+
 public class DBUsers {
     private static User current;
 
+    /**
+     * This is the method to return all users
+     * */
     public static ObservableList<User> getAllUsers () {
         ObservableList<User> users = FXCollections.observableArrayList();
 
@@ -37,6 +44,11 @@ public class DBUsers {
     }
 
 
+    /**
+     * This is the method to check user name and password
+     * @param text the user name
+     * @param text1 the user password
+     * */
     public static boolean checkLogin(String text, String text1) {
         try {
             String sqlcl = "SELECT * from users WHERE User_Name = ? AND Password = ?";
@@ -61,6 +73,9 @@ public class DBUsers {
         return true;
     }
 
+    /**
+     * This is the method to return current user
+     * */
     public static User getCurrentUser() {return current;}
 
 }

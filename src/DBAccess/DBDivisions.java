@@ -10,7 +10,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * This is the division database class that contains methods for getting divisions
+ * */
+
 public class DBDivisions {
+
+    /**
+     * This is the method to return all divisions
+     * */
     public static ObservableList<Division> getAllDivisions () {
         ObservableList<Division> dlist = FXCollections.observableArrayList();
 
@@ -33,6 +41,10 @@ public class DBDivisions {
         return dlist;
     }
 
+    /**
+     * This is the method to return all divisions by countryID
+     * @param countryID the country ID
+     * */
     public static ObservableList<Division> getMatchedDivisions (int countryID) {
         ObservableList<Division> matchedList = FXCollections.observableArrayList();
 

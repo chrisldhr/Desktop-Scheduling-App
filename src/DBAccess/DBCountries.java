@@ -10,7 +10,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * This is the countries database class that contains method for getting all countries
+ * */
+
 public class DBCountries {
+
+    /**
+     * This method returns all countries
+     * */
     public static ObservableList<Country> getAllCountries () {
         ObservableList<Country> clist = FXCollections.observableArrayList();
 
@@ -31,23 +39,4 @@ public class DBCountries {
         }
         return clist;
     }
-
-//    public static Country getMatchedCountry(int countryID) {
-//        Country country = null;
-//        try {
-//            String sql = "SELECT * FROM countries WHERE Country_ID = \"" + countryID + "\"";
-//            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-//
-//            ResultSet rs = ps.executeQuery();
-//                int CountryID = rs.getInt("Country_ID");
-//                String CountryName = rs.getString("Country");
-//                country = new Country(CountryID, CountryName);
-//            System.out.println(rs);
-//            System.out.println(country);
-//
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-//        return country;
-//    }
 }

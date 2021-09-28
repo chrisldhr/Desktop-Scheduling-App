@@ -3,6 +3,10 @@ package Helper;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+/**
+ * This is the helper class to connect to the database
+ * */
+
 public abstract class JDBC {
     private static final String protocol = "jdbc";
     private static final String vendor = ":mysql:";
@@ -14,6 +18,9 @@ public abstract class JDBC {
     private static String password = "Passw0rd!"; // Password
     public static Connection connection;  // Connection Interface
 
+    /**
+     * This is the method to open the connection
+     * */
     public static void openConnection()
     {
         try {
@@ -27,9 +34,16 @@ public abstract class JDBC {
         }
     }
 
+    /**
+     * This is the method to return the connection
+     * */
     public static Connection getConnection() {
         return connection;
     }
+
+    /**
+     * This is the method to close the connection
+     * */
     public static void closeConnection() {
         try {
             connection.close();

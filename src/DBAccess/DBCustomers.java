@@ -12,7 +12,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * This is the customer database class that contains methods for getting, adding, modifying customers
+ * */
+
 public class DBCustomers {
+
+    /**
+     * This is the method to return all customers
+     * */
     public static ObservableList<Customer> getAllCustomers () {
         ObservableList<Customer> customers = FXCollections.observableArrayList();
 
@@ -39,6 +47,14 @@ public class DBCustomers {
         return customers;
     }
 
+    /**
+     * This is the method to add a customer
+     * @param name the customer name
+     * @param address the customer address
+     * @param postal the customer postal code
+     * @param phone the customer phone
+     * @param division the division ID
+     * */
     public static void addCustomer(String name,String address, String postal, String phone, int division) {
         try {
             String sqlac = "INSERT INTO customers VALUES(NULL, ?, ?, ?, ?, CURRENT_TIMESTAMP, 'script', CURRENT_TIMESTAMP, 'script', ?)";
@@ -56,6 +72,15 @@ public class DBCustomers {
         }
     }
 
+    /**
+     * This is the method to modify a customer
+     * @param id the customer id
+     * @param name the customer name
+     * @param address the customer address
+     * @param postal the customer postal code
+     * @param phone the customer phone
+     * @param division the division ID
+     * */
     public static void modifyCustomer(int id, String name, String address, String postal, String phone, int division) {
         try {
             String sqlmc = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Create_Date = CURRENT_TIMESTAMP, Created_By = 'script', Last_Update = CURRENT_TIMESTAMP, Last_Updated_By = 'script', Division_ID = ? WHERE Customer_ID = ?";
@@ -74,6 +99,10 @@ public class DBCustomers {
         }
     }
 
+    /**
+     * This is the method to delete a customer
+     * @param customerID the customer ID
+     * */
     public static void deleteCustomer(int customerID) {
         try {
             String sqlda = "DELETE FROM appointments WHERE Customer_ID = ?";
@@ -93,6 +122,10 @@ public class DBCustomers {
         }
     }
 
+    /**
+     * This is the method to get a customer by division
+     * @param divisionID the division ID
+     * */
     public static ObservableList getCustomersByDivision(int divisionID) {
         ObservableList<Customer> customers = FXCollections.observableArrayList();
 

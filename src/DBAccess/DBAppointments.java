@@ -10,10 +10,16 @@ import javafx.collections.ObservableList;
 import java.sql.*;
 import java.time.*;
 
+/**
+ * This is the appointment database class that contains methods for getting, adding, modifying appointments
+ * */
+
 public class DBAppointments {
     public static ZoneId localZone = ZoneId.systemDefault();
 
-
+    /**
+     * This is the method to return all appointments
+     * */
     public static ObservableList<Appointment> getAllAppointments () {
         ObservableList<Appointment> appointments = FXCollections.observableArrayList();
 
@@ -48,6 +54,18 @@ public class DBAppointments {
         return appointments;
     }
 
+    /**
+     * This is the method to add an appointment
+     * @param Title the appointment Title
+     * @param Description the appointment Description
+     * @param Location the appointment Location
+     * @param Type the appointment Type
+     * @param Start the appointment Start
+     * @param End the appointment End
+     * @param CustomerID the customer ID
+     * @param UserID the user ID
+     * @param ContactID the contact ID
+     * */
     public static void addAppointment(String Title, String Description, String Location, String Type, Timestamp Start, Timestamp End, int CustomerID, int UserID, int ContactID) {
         try {
             String sqlaa = "INSERT INTO appointments VALUES(NULL, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, 'script', CURRENT_TIMESTAMP, 'script', ?, ?, ?)";
@@ -72,6 +90,19 @@ public class DBAppointments {
         }
     }
 
+    /**
+     * This is the method to modify an appointment
+     * @param appointmentID the appointment ID
+     * @param title the appointment title
+     * @param description the appointment description
+     * @param location the appointment location
+     * @param type the appointment type
+     * @param startTimestamp the appointment start
+     * @param endTimestamp the appointment end
+     * @param customerID the customer ID
+     * @param userID the user ID
+     * @param contactID the contact ID
+     * */
     public static void modifyAppointment(int appointmentID, String title, String description, String location, String type, Timestamp startTimestamp, Timestamp endTimestamp, int customerID, int userID, int contactID) {
         try {
             String sqlma = "UPDATE appointments SET Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Create_Date = CURRENT_TIMESTAMP, Created_By = 'script', Last_Update = CURRENT_TIMESTAMP, Last_Updated_By = 'script', Customer_ID = ?, User_ID = ?, Contact_ID = ? WHERE Appointment_ID = ?";
@@ -97,6 +128,10 @@ public class DBAppointments {
         }
     }
 
+    /**
+     * This is the method to delete an appointment
+     * @param appointmentID the appointment ID
+     * */
     public static void deleteAppointment(int appointmentID) {
         try {
         String sqlda = "DELETE FROM appointments WHERE Appointment_ID = ?";
@@ -117,6 +152,13 @@ public class DBAppointments {
 //        return Timestamp.valueOf(local.toLocalDateTime().atZone(localZone).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime());
 //    }
 
+    /**
+     * This is the method to check overlapping appointments
+     * @param customerID the customer ID
+     * @param start the appointment start
+     * @param end the appointment end
+     * @param appointmentID the appointment ID
+     * */
     public static Boolean checkOverlap(int customerID, Timestamp start, Timestamp end, int appointmentID) {
         try {
             String sqlco = "SELECT * from appointments WHERE Customer_ID = ? " +
@@ -150,6 +192,9 @@ public class DBAppointments {
         return false;
     }
 
+    /**
+     * This is the method to returns current month appointments
+     * */
 
     public static ObservableList<Appointment> getMonthAppointments() {
         LocalTime nowTime = LocalTime.now();
@@ -200,6 +245,9 @@ public class DBAppointments {
 
     }
 
+    /**
+     * This is the method to return the next week of appointments
+     * */
     public static ObservableList<Appointment> getWeekAppointments() {
         LocalTime nowTime = LocalTime.now();
         LocalDate nowDate = LocalDate.now();
@@ -247,6 +295,9 @@ public class DBAppointments {
 
     }
 
+    /**
+     * This is the method that checks for upcoming appointments in the next 15 minutes
+     * */
     public static boolean checkUpcoming() {
         try {
             int userID = DBUsers.getCurrentUser().getUserID();
@@ -272,6 +323,9 @@ public class DBAppointments {
         return false;
     }
 
+    /**
+     * This is the method to return all the types of appointments
+     * */
     public static ObservableList<String> getAllTypes () {
         ObservableList<String> types = FXCollections.observableArrayList();
 
@@ -290,6 +344,12 @@ public class DBAppointments {
         }
         return types;
     }
+
+    /**
+     * This is the method to return appointments by month and type
+     * @param month the appointment month
+     * @param type the appointment type
+     * */
 
     public static int getTotalAppts(String month, String type) {
         ObservableList<Appointment> appointments = FXCollections.observableArrayList();
@@ -324,6 +384,10 @@ public class DBAppointments {
         return appointments.size();
     }
 
+    /**
+     * This is the method to return appointments by contact
+     * @param contactID the contact ID
+     * */
     public static ObservableList getContactAppts(int contactID) {
         ObservableList<Appointment> appointments = FXCollections.observableArrayList();
 
