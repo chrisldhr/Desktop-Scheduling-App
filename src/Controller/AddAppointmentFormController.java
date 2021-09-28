@@ -1,12 +1,9 @@
 package Controller;
 
 import DBAccess.*;
-import Model.Appointment;
 import Model.Contact;
 import Model.Customer;
 import Model.User;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,7 +12,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -145,19 +141,16 @@ public class AddAppointmentFormController implements Initializable {
 
     }
 
-    public static Boolean checkBusiness(LocalDateTime time) {
-        LocalDateTime startBusiness = convertToLocal(LocalDateTime.of(date, LocalTime.of(8, 0)));
-        LocalDateTime endBusiness = convertToLocal(LocalDateTime.of(date, LocalTime.of(22, 0)));
+    public Boolean checkBusiness(LocalDateTime time) {
+        LocalDateTime startBusiness = ToLocal.Convert(LocalDateTime.of(date, LocalTime.of(8, 0)));
+        LocalDateTime endBusiness = ToLocal.Convert(LocalDateTime.of(date, LocalTime.of(22, 0)));
 
-        //LocalDateTime checkTime = convertToLocal(time);
         return time.isBefore(startBusiness) || time.isAfter(endBusiness);
     }
 
-    public static LocalDateTime convertToEST (LocalDateTime local) {
-        return local.atZone(localZone).withZoneSameInstant(ZoneId.of("America/New_York")).toLocalDateTime();
-    }
+    ConvertInterface ToLocal = T -> {
+        return T.atZone(ZoneId.of("America/New_York")).withZoneSameInstant(localZone).toLocalDateTime();
+    };
 
-    public static LocalDateTime convertToLocal (LocalDateTime est) {
-        return est.atZone(ZoneId.of("America/New_York")).withZoneSameInstant(localZone).toLocalDateTime();
-    }
 }
+

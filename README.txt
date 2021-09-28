@@ -23,6 +23,28 @@ Directions:
 Description of additional report: Provides schedules based on description
 
 
+//        LocalDateTime startBusiness = convertToLocal(LocalDateTime.of(date, LocalTime.of(8, 0)));
+
+//    public static LocalDateTime convertToLocal (LocalDateTime EST) {
+//        return EST.atZone(ZoneId.of("America/New_York")).withZoneSameInstant(localZone).toLocalDateTime();
+//    }
+
+    public static LocalDateTime convertToEST (LocalDateTime local) {
+        return local.atZone(localZone).withZoneSameInstant(ZoneId.of("America/New_York")).toLocalDateTime();
+    }
+
+//    public static Timestamp convertToLocal(Timestamp utc) {
+//        return Timestamp.valueOf(utc.toLocalDateTime().atZone(ZoneId.of("UTC")).withZoneSameInstant(localZone).toLocalDateTime());
+//    }
+
+    public static LocalDateTime convertToEST (LocalDateTime local) {
+        return local.atZone(localZone).withZoneSameInstant(ZoneId.of("America/New_York")).toLocalDateTime();
+    }
+
+    public static LocalDateTime convertToLocal (LocalDateTime est) {
+        return est.atZone(ZoneId.of("America/New_York")).withZoneSameInstant(localZone).toLocalDateTime();
+    }
+
 //            ResultSet rs = psac.getGeneratedKeys();
 //            rs.next();
 //            Statement statement = JDBC.getConnection().createStatement();

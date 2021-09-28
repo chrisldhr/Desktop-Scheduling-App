@@ -54,7 +54,7 @@ public class ScheduleFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        check15();
+        checkUpcoming();
 
         AppointmentTable.setItems(DBAppointments.getAllAppointments());
         AppointmentID.setCellValueFactory(new PropertyValueFactory<>("AppointmentID"));
@@ -226,8 +226,8 @@ public class ScheduleFormController implements Initializable {
         stage.show();
     }
 
-    public void check15() {
-        if (DBAppointments.check15()){
+    public void checkUpcoming() {
+        if (DBAppointments.checkUpcoming()){
             UpcomingAlert.setText("Next Appointment in 15 min");
             UpcomingAlert.setTextFill(RED);
             UpcomingAlert.setWrapText(true);

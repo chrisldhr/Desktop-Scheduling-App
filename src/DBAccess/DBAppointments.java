@@ -247,7 +247,7 @@ public class DBAppointments {
 
     }
 
-    public static boolean check15() {
+    public static boolean checkUpcoming() {
         try {
             int userID = DBUsers.getCurrentUser().getUserID();
             Timestamp now = Timestamp.valueOf(LocalDateTime.now());
