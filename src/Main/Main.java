@@ -16,7 +16,9 @@ import java.util.ResourceBundle;
  *<p>
  * @author Christopher Liu
  *<p>
- * Lambda expressions: In AddAppointmentFormController (bottom of code)
+ * Lambda expressions:
+ * <p>
+ * In AddAppointmentFormController (bottom of code)
  *<p>
  * and ModifyAppointmentFormController (bottom of code)
  **/
