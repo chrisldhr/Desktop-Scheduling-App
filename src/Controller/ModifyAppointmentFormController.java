@@ -25,6 +25,10 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.ResourceBundle;
 
+/**
+ * This is the controller class for the modify appointment form
+ * */
+
 public class ModifyAppointmentFormController implements Initializable {
     public Appointment Selected;
     public TextField IDText;
@@ -48,6 +52,10 @@ public class ModifyAppointmentFormController implements Initializable {
     public static Timestamp endTimestamp;
     public static int appointmentID;
 
+    /** When the Modify button is clicked, the appointment is saved to the database and redirects to the schedule form
+     * @param actionEvent Modify button
+     * @throws IOException If input values are invalid
+     */
     public void ToModifyButton(ActionEvent actionEvent) throws IOException {
         try {
             String title = TitleText.getText();
@@ -110,6 +118,10 @@ public class ModifyAppointmentFormController implements Initializable {
         }
     }
 
+    /** When the cancel button is clicked, the view redirects to the schedule form
+     * @param actionEvent Cancel button
+     * @throws IOException From FXMLLoader.
+     */
     public void ToCancelButton(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/View/ScheduleForm.fxml"));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
@@ -119,6 +131,10 @@ public class ModifyAppointmentFormController implements Initializable {
         stage.show();
     }
 
+    /** Initializes the form with selected appointment values
+     * @param url The url used to resolve relative paths
+     * @param resourceBundle The resourceBundle used to localize the root object
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Selected = ScheduleFormController.getModifyingAppointment();
@@ -178,6 +194,9 @@ public class ModifyAppointmentFormController implements Initializable {
         }
     }
 
+    /** This method checks that the time is outside of business hours
+     * @param time the time to check
+     */
     public Boolean checkBusiness(LocalDateTime time) {
         LocalDateTime startBusiness = ToLocal.Convert(LocalDateTime.of(date, LocalTime.of(8, 0)));
         LocalDateTime endBusiness = ToLocal.Convert(LocalDateTime.of(date, LocalTime.of(22, 0)));
@@ -185,6 +204,9 @@ public class ModifyAppointmentFormController implements Initializable {
         return time.isBefore(startBusiness) || time.isAfter(endBusiness);
     }
 
+    /** This is the Lambda expression that converts EST to local time
+     * and is used in the checkBusiness function
+     */
     ConvertInterface ToLocal = T -> {
         return T.atZone(ZoneId.of("America/New_York")).withZoneSameInstant(localZone).toLocalDateTime();
     };

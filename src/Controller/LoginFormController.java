@@ -27,6 +27,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * This is the controller class for the login form
+ * */
 public class LoginFormController implements Initializable {
     public TextField UsernameText;
     public TextField PasswordText;
@@ -41,6 +44,10 @@ public class LoginFormController implements Initializable {
     ResourceBundle RB = ResourceBundle.getBundle("Login", Locale.getDefault());
     //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm");
 
+    /** When the Login button is clicked, the username and password is compared to the database and if matches, redirects to the schedule form
+     * @param actionEvent Login button
+     * @throws IOException If input values are invalid
+     */
     public void ToLoginButton(ActionEvent actionEvent) throws IOException {
         try {
             if (DBUsers.checkLogin(UsernameText.getText(), PasswordText.getText())) {
@@ -68,10 +75,17 @@ public class LoginFormController implements Initializable {
         }
     }
 
+    /** When the cancel button is clicked, the program exits
+     * @param actionEvent Cancel button
+     */
     public void ToCancelButton(ActionEvent actionEvent) {
         System.exit(0);
     }
 
+    /** Initializes the form with values of default language
+     * @param url The url used to resolve relative paths
+     * @param resourceBundle The resourceBundle used to localize the root object
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         LocationLabel.setText(String.valueOf(localZone));
@@ -83,6 +97,9 @@ public class LoginFormController implements Initializable {
         TimeZone.setText(RB.getString("timezone"));
     }
 
+    /** This method tracks login attempts to a text file
+     * @param attempt the login attempt
+     */
     public void loginAttempt(String attempt) throws IOException {
         String filename = "login_activity.txt";
         FileWriter fwriter = new FileWriter(filename, true);

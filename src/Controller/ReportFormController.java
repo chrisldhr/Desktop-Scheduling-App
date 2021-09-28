@@ -25,6 +25,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * This is the controller class for the reports form
+ * */
 public class ReportFormController implements Initializable {
     public ComboBox MonthCombo;
     public ComboBox TypeCombo;
@@ -51,6 +54,10 @@ public class ReportFormController implements Initializable {
     public TableView AppointmentTable;
     public TableView CustomerTable;
 
+    /** Initializes the form with values for combo boxes
+     * @param url The url used to resolve relative paths
+     * @param resourceBundle The resourceBundle used to localize the root object
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         months = FXCollections.observableArrayList("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
@@ -65,6 +72,10 @@ public class ReportFormController implements Initializable {
         DivisionIDCombo.setVisibleRowCount(5);
     }
 
+    /** When the Back button is clicked, the view redirects to the schedule form
+     * @param actionEvent Back button
+     * @throws IOException From FXMLLoader.
+     */
     public void ToScheduleForm(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/View/ScheduleForm.fxml"));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -74,6 +85,10 @@ public class ReportFormController implements Initializable {
         stage.show();
     }
 
+    /** When the Run button is clicked, the total appointments are calculated and returned
+     * @param actionEvent Run button
+     * @throws IOException From FXMLLoader.
+     */
     public void ToRunButton(ActionEvent actionEvent) {
         String month = (String) MonthCombo.getValue();
         String type = (String) TypeCombo.getValue();
@@ -82,6 +97,9 @@ public class ReportFormController implements Initializable {
         TotalText.setText(total);
     }
 
+    /** When a contact is chosen in the combo box, the tableview displays contact appointments
+     * @param actionEvent contact combo box
+     */
     public void ToContactCombo(ActionEvent actionEvent) {
         int contactID = ContactCombo.getValue().getContactID();
         AppointmentTable.setItems(DBAppointments.getContactAppts(contactID));
@@ -97,6 +115,9 @@ public class ReportFormController implements Initializable {
         ContactID.setCellValueFactory(new PropertyValueFactory<>("ContactID"));
     }
 
+    /** When a division ID is chosen in the combo box, the tableview displays customers with that division ID
+     * @param actionEvent division ID combo box
+     */
     public void ToDivisionIDCombo(ActionEvent actionEvent) {
         int divisionID = DivisionIDCombo.getValue().getDivisionID();
         CustomerTable.setItems(DBCustomers.getCustomersByDivision(divisionID));
@@ -107,6 +128,4 @@ public class ReportFormController implements Initializable {
         Phone.setCellValueFactory(new PropertyValueFactory<>("Phone"));
         DivisionID.setCellValueFactory(new PropertyValueFactory<>("DivisionID"));
     }
-
-
 }

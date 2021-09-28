@@ -21,6 +21,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * This is the controller class for the modify customer form
+ * */
+
 public class ModifyCustomerFormController implements Initializable {
     public TextField IDText;
     public TextField NameText;
@@ -31,6 +35,10 @@ public class ModifyCustomerFormController implements Initializable {
     public ComboBox<Division> DivisionCombo;
     public Customer Selected;
 
+    /** When the Modify button is clicked, the customer is saved to the database and redirects to the schedule form
+     * @param actionEvent Modify button
+     * @throws IOException If input values are invalid
+     */
     public void ToModifyButton(ActionEvent actionEvent) throws IOException {
         try {
             int id = Integer.parseInt(IDText.getText());
@@ -63,6 +71,10 @@ public class ModifyCustomerFormController implements Initializable {
         }
     }
 
+    /** When the cancel button is clicked, the view redirects to the schedule form
+     * @param actionEvent Cancel button
+     * @throws IOException From FXMLLoader.
+     */
     public void ToCancelButton(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/View/ScheduleForm.fxml"));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
@@ -72,6 +84,10 @@ public class ModifyCustomerFormController implements Initializable {
         stage.show();
     }
 
+    /** Initializes the form with values of selected customer
+     * @param url The url used to resolve relative paths
+     * @param resourceBundle The resourceBundle used to localize the root object
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Selected = ScheduleFormController.getModifyingCustomer();
@@ -103,9 +119,11 @@ public class ModifyCustomerFormController implements Initializable {
                 break;
             }
         }
-//        CountryCombo.setValue(DBCountries.getMatchedCountry(countryID));
     }
 
+    /** When a country is chosen in the combo box, the division combo box only shows available divisions
+     * @param actionEvent Country combo box
+     */
     public void ToCountryCombo(ActionEvent actionEvent) {
         int countryID = CountryCombo.getValue().getCountryID();
         DivisionCombo.setItems(DBDivisions.getMatchedDivisions(countryID));
