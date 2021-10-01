@@ -298,9 +298,10 @@ public class DBAppointments {
     /**
      * This is the method that checks for upcoming appointments in the next 15 minutes
      * */
-    public static boolean checkUpcoming() {
+    public static Appointment checkUpcoming() {
         try {
             int userID = DBUsers.getCurrentUser().getUserID();
+            Appointment upcoming = null;
             Timestamp now = Timestamp.valueOf(LocalDateTime.now());
             Timestamp nowPlus15 = Timestamp.valueOf(LocalDateTime.now().plusMinutes(15));
 
@@ -315,12 +316,24 @@ public class DBAppointments {
             ResultSet rs = psco.executeQuery();
 
             if (rs.next()) {
-                return true;
+                int AppointmentID = rs.getInt("Appointment_ID");
+                String Title = rs.getString("Title");
+                String Description = rs.getString("Description");
+                String Location = rs.getString("Location");
+                String Type = rs.getString("Type");
+                Timestamp StartUTC = rs.getTimestamp("Start");
+                Timestamp EndUTC = rs.getTimestamp("End");
+                int CustomerID = rs.getInt("Customer_ID");
+                int UserID = rs.getInt("User_ID");
+                int ContactID = rs.getInt("Contact_ID");
+                upcoming = new Appointment(AppointmentID, Title, Description, Location, Type, StartUTC, EndUTC, CustomerID, UserID, ContactID);
+
+                return upcoming;
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return false;
+        return null;
     }
 
     /**

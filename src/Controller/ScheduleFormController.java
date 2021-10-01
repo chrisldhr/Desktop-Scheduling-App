@@ -315,8 +315,10 @@ public class ScheduleFormController implements Initializable {
     /** This method checks for upcoming appointments in the next 15 minutes and displays an alert
      */
     public void checkUpcoming() {
-        if (DBAppointments.checkUpcoming()){
-            UpcomingAlert.setText("Next Appointment in 15 min");
+        if (DBAppointments.checkUpcoming() != null){
+            Appointment upcoming = DBAppointments.checkUpcoming();
+            UpcomingAlert.setText("Next Appointment \n ID: " + upcoming.getAppointmentID() +
+                    "\n Start: " + upcoming.getStart());
             UpcomingAlert.setTextFill(RED);
             UpcomingAlert.setWrapText(true);
         }
