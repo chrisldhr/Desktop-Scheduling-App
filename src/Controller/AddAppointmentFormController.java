@@ -26,6 +26,8 @@ import java.util.ResourceBundle;
 
 /**
  * This is the controller class for the add appointment form
+ * <p>
+ * The checkBusiness method contains the lambda expression that converts EST to local time zone
  * */
 
 public class AddAppointmentFormController implements Initializable {
@@ -158,21 +160,19 @@ public class AddAppointmentFormController implements Initializable {
     }
 
     /** This method checks that the time is outside of business hours
+     * and this method contains the lambda expression that converts EST to local time
      * @param time the time to check
      */
     public Boolean checkBusiness(LocalDateTime time) {
+        ConvertInterface ToLocal = T -> {
+            return T.atZone(ZoneId.of("America/New_York")).withZoneSameInstant(localZone).toLocalDateTime();
+        };
+
         LocalDateTime startBusiness = ToLocal.Convert(LocalDateTime.of(date, LocalTime.of(8, 0)));
         LocalDateTime endBusiness = ToLocal.Convert(LocalDateTime.of(date, LocalTime.of(22, 0)));
 
         return time.isBefore(startBusiness) || time.isAfter(endBusiness);
     }
-
-    /** This is the Lambda expression that converts EST to local time
-     * and is used in the checkBusiness function
-     */
-    ConvertInterface ToLocal = T -> {
-        return T.atZone(ZoneId.of("America/New_York")).withZoneSameInstant(localZone).toLocalDateTime();
-    };
 
 }
 

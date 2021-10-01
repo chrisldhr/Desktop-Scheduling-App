@@ -4,6 +4,7 @@ import DBAccess.DBAppointments;
 import DBAccess.DBContacts;
 import DBAccess.DBCustomers;
 import DBAccess.DBDivisions;
+import Model.Appointment;
 import Model.Contact;
 import Model.Division;
 import javafx.collections.FXCollections;
@@ -27,6 +28,8 @@ import java.util.ResourceBundle;
 
 /**
  * This is the controller class for the reports form
+ * <p>
+ * The ToContactCombo method contain the lambda expression that filters appointments by contact ID
  * */
 public class ReportFormController implements Initializable {
     public ComboBox MonthCombo;
@@ -98,11 +101,20 @@ public class ReportFormController implements Initializable {
     }
 
     /** When a contact is chosen in the combo box, the tableview displays contact appointments
+     * and this method contains the lambda expression that filters out appointments not related to contact
      * @param actionEvent contact combo box
      */
     public void ToContactCombo(ActionEvent actionEvent) {
         int contactID = ContactCombo.getValue().getContactID();
-        AppointmentTable.setItems(DBAppointments.getContactAppts(contactID));
+
+        ObservableList<Appointment> allAppointments = DBAppointments.getAllAppointments();
+
+        ObservableList<Appointment> contactAppointments = allAppointments.filtered(t ->{
+            return t.getContactID() == contactID;
+        });
+
+        //AppointmentTable.setItems(DBAppointments.getContactAppts(contactID));
+        AppointmentTable.setItems(contactAppointments);
         AppointmentID.setCellValueFactory(new PropertyValueFactory<>("AppointmentID"));
         Title.setCellValueFactory(new PropertyValueFactory<>("Title"));
         Description.setCellValueFactory(new PropertyValueFactory<>("Description"));

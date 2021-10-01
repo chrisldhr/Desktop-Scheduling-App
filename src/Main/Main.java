@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
  * <p>
  * In AddAppointmentFormController (bottom of code)
  *<p>
- * and ModifyAppointmentFormController (bottom of code)
+ * and ReportFormController (second combobox method from the bottom of code)
  **/
 
 public class Main extends Application {
