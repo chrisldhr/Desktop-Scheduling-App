@@ -1,27 +1,11 @@
-Title: C195 Performance Assessment Scheduling Application
+A Java GUI application that connects with a MySQL database for scheduling appointments. 
 
-Purpose: To allow for users to schedule appointments with customers
+![image](https://user-images.githubusercontent.com/90338393/143683879-47f9bf25-a1a2-4819-afef-bf2b79271213.png)
 
-Author: Christopher Liu (001274582)
+![image](https://user-images.githubusercontent.com/90338393/143683905-6e8651dc-9a02-4d50-aff4-97b1989734e6.png)
 
-Contact information: cliu9@my.wgu.edu
+![image](https://user-images.githubusercontent.com/90338393/143683940-524a4460-0f04-44fc-b460-f14774f816b6.png)
 
-Application version: 1.0
+![image](https://user-images.githubusercontent.com/90338393/143683956-b034854b-0dc8-4bf7-9d5f-86376d485d3e.png)
 
-Date: Sep 22, 2021
-
-IDE: IntelliJ Community 2020.1.3 || Java SE 11.0.11 || JavaFX-SDK-11.0.2
-
-Directions:
-- Please unzip folder and open in InteliJ
-- File->Settings->Path Variables->Add PATH_T0_FX and link to FX library directory
-- File->Project Structure->Libraries->Add FX library directory and mysql-connector-java-8.0.26
-- Add to VM options in Main Configuration
-"--module-path ${PATH_TO_FX} --add-modules javafx.fxml,javafx.controls,javafx.graphics"
-- Then run src/Main/Main.java
-
-Description of additional report: Provides customers based on division ID
-
-Lambda expressions: In AddAppointmentFormController (bottom of code)
-and ModifyAppointmentFormController (bottom of code)
-
+![image](https://user-images.githubusercontent.com/90338393/143684009-920f2fd6-dcad-4c3e-82b1-8a0f1cd237f6.png)
